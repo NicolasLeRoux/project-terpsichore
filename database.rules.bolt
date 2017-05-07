@@ -1,4 +1,43 @@
-path / {
+path /events {
 	read() { true }
 	write() { false }
+	index() { "sortKey" }
+}
+
+path /events/{eventId} is Event {
+	read() { true }
+	write() { true }
+}
+
+/*
+ * Définition de l'objet 'Event'
+ */
+type Event {
+	organizer: String32,
+	title: String64,
+	date: StringDate,
+	sortKey: Number,
+	location: String64,
+	link: String256,
+	description: String4096
+}
+
+type String32 extends String {
+	validate() { this.length > 0 && this.length <= 32 }
+}
+
+type String64 extends String {
+	validate() { this.length > 0 && this.length <= 64 }
+}
+
+type String256 extends String {
+	validate() { this.length > 0 && this.length <= 256 }
+}
+
+type String4096 extends String {
+	validate() { this.length > 0 && this.length <= 4096 }
+}
+
+type StringDate extends String {
+	validate() { this.length == 25 }
 }
