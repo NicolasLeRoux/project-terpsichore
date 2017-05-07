@@ -1,0 +1,31 @@
+{
+  "name": "project-terpsichore",
+  "version": "0.1.0-SNAPSHOT",
+  "description": "TODO",
+  "main": "index.js",
+  "scripts": {
+    "start": "firebase serve",
+    "deploy": "firebase deploy",
+    "login": "firebase login --reauth",
+    "bolt": "firebase-bolt database.rules.bolt"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NicolasLeRoux/project-terpsichore.git"
+  },
+  "keywords": [
+    "TODO"
+  ],
+  "author": "Nicolas Le Roux",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/NicolasLeRoux/project-terpsichore/issues"
+  },
+  "homepage": "https://github.com/NicolasLeRoux/project-terpsichore#readme",
+  "devDependencies": {
+    "firebase-bolt": "^0.8.2",
+    "firebase-tools": "^3.2.1",
+    "vulcanize": "^1.15.3",
+    "write": "^0.3.2"
+  }
+}
