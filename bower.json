@@ -1,0 +1,14 @@
+{
+  "name": "project-terpsichore",
+  "authors": [
+    "Nicolas Le Roux"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "firebase": "^3.6.5",
+    "polymer": "^1.7.1",
+    "polymerfire": "^0.10.3"
+  },
+  "devDependencies": {
+  }
+}

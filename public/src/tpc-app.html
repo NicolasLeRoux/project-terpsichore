@@ -1,0 +1,42 @@
+<!--
+Page principale de l'application hygie.
+-->
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/polymerfire/firebase-app.html">
+
+<dom-module id="tpc-app">
+
+	<template>
+		<style>
+
+		</style>
+
+		<h1>Hello world !</h1>
+	</template>
+
+	<script>
+
+		Polymer({
+			is: 'tpc-app',
+
+			properties: {
+				firebaseApp: {
+					type: Object,
+					notify: true
+				}
+			},
+
+			ready: function() {
+				// Création de l'élément firebase-app
+				this.firebaseApp = firebase.initializeApp({
+					id: 'firebase-app',
+					name: app.name,
+					authDomain: app.authDomain,
+					databaseURL: app.databaseURL,
+					storageBucket: app.storageBucket,
+					messagingSenderId: app.messagingSenderId
+				});
+			}
+		});
+	</script>
+</dom-module>
