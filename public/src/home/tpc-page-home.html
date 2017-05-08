@@ -2,25 +2,85 @@
 Page ...
 -->
 <link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/app-layout/app-header-layout/app-header-layout.html">
+<link rel="import" href="../../bower_components/app-layout/app-scroll-effects/effects/waterfall.html">
+<link rel="import" href="../../bower_components/app-layout/app-header/app-header.html">
+<link rel="import" href="../../bower_components/app-layout/app-toolbar/app-toolbar.html">
+<link rel="import" href="../../bower_components/paper-progress/paper-progress.html">
 
 <dom-module id="tpc-page-home">
 
 	<template>
 		<style>
+			app-toolbar {
+				background-color: #f7f7f7;
+			}
 
+			paper-progress {
+				width: 100%;
+			}
+
+			.events {
+				padding-top: 10px;
+				background-color: #EEE;
+			}
+
+			.events h4 {
+				margin: 10px;
+			}
+
+			.events-list {
+				border-top: 1px solid rgba(0, 0, 0, 0.12);
+				border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+				background-color: white;
+				list-style-type: none;
+				padding: 0;
+				margin: 0;
+			}
+
+			.event-item a {
+				text-decoration: none;
+				color: black;
+			}
+
+			.event-item-content {
+				margin: 0 10px;
+			}
+
+			.event-item:not(:first-child) {
+				border-top: 1px solid rgba(0, 0, 0, 0.12);
+
+			}
 		</style>
 
-		<h1>Page home</h1>
-
-		<div class="events">
-			<template is="dom-repeat"
-				items="{{events}}"
-				as="event">
-				<ul>
-					<li><a href="/event/{{event.$key}}">{{event.title}}</a></li>
+		<app-header-layout>
+			<app-header reveals condenses effects="waterfall">
+				<app-toolbar>
+					<div>
+						<h1>Page home</h1>
+					</div>
+				</app-toolbar>
+				<paper-progress indeterminate></paper-progress>
+			</app-header>
+			<div class="events">
+				<h4>Mardi 9 mai</h4>
+				<ul class="events-list">
+					<template is="dom-repeat"
+						items="{{events}}"
+						as="event">
+						<li class="event-item">
+							<a href="/event/{{event.$key}}">
+								<div class="event-item-content">
+									<p>{{event.organizer}}</p>
+									<h3>{{event.title}}</h3>
+								</div>
+							</a>
+						</li>
+					</template>
 				</ul>
-			</template>
-		</div>
+			</div>
+		</app-header-layout>
+
 	</template>
 
 	<script>

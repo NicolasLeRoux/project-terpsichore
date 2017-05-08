@@ -14,7 +14,7 @@ Page ...
 	<template>
 		<style>
 			app-toolbar {
-				background-color: #DDD;
+				background-color: #f7f7f7;
 			}
 
 			paper-progress {
@@ -33,7 +33,7 @@ Page ...
 						<a href="/home">Retour accueil</a>
 					</div>
 				</app-toolbar>
-				<paper-progress indeterminate class="blue"></paper-progress>
+				<paper-progress indeterminate></paper-progress>
 			</app-header>
 			<div class="event">
 				<h1>{{event.title}}</h1>
@@ -92,7 +92,7 @@ Page ...
 						document.getElementById('markdown-content').innerHTML =
 							marked(response.description);
 
-						this.removeProgressBar();
+						//this.removeProgressBar();
 					}
 				}
 			},

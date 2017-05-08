@@ -12,7 +12,8 @@
     "app-route": "PolymerElements/app-route#^1.0.1",
     "marked": "^0.3.6",
     "app-layout": "^1.0.1",
-    "paper-progress": "^1.0.12"
+    "paper-progress": "^1.0.12",
+    "paper-styles": "^1.2.1"
   },
   "devDependencies": {}
 }
