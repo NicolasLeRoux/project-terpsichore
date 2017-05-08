@@ -6,8 +6,6 @@
 
 		<title>Project Terpsichore</title>
 
-		<link rel="import" href="/tpc-app.vulcanised.html" async>
-
 		<style>
 			body {
 				margin: 0;
@@ -25,6 +23,19 @@
 				databaseURL: 'https://project-terpsichore.firebaseio.com',
 				storageBucket: 'project-terpsichore.appspot.com',
 			};
+		</script>
+		<script>
+			var linkNode = document.createElement('link');
+			linkNode.setAttribute('rel', 'import');
+			linkNode.setAttribute('async', 'true');
+
+			if (document.location.hostname === 'localhost') {
+				linkNode.setAttribute('href', '/src/tpc-app.html');
+			} else {
+				linkNode.setAttribute('href', '/tpc-app.vulcanised.html');
+			}
+
+			document.head.append(linkNode);
 		</script>
 	</body>
 </html>
