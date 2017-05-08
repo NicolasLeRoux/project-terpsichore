@@ -3,6 +3,11 @@ Page principale de l'application hygie.
 -->
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/polymerfire/firebase-app.html">
+<link rel="import" href="../bower_components/app-route/app-location.html">
+<link rel="import" href="../bower_components/app-route/app-route.html">
+<link rel="import" href="../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="./home/tpc-page-home.html">
+<link rel="import" href="./event/tpc-page-event.html">
 
 <dom-module id="tpc-app">
 
@@ -11,11 +16,38 @@ Page principale de l'application hygie.
 
 		</style>
 
+		<app-location route="{{route}}"></app-location>
+
+		<app-route
+			route="{{route}}"
+			pattern="/:page"
+			data="{{pageData}}"
+			tail="{{pageDataTail}}">
+		</app-route>
+
+		<app-route
+			route="{{route}}"
+			pattern="/event/:eventId"
+			data="{{eventData}}"
+			tail="{{eventDataTail}}">
+		</app-route>
+
 		<h1>Hello world !</h1>
+
+		<iron-pages role="main" selected="{{pageData.page}}" attr-for-selected="name">
+			<tpc-page-home
+				name="home"
+				firebase-app="{{firebaseApp}}">
+			</tpc-page-home>
+			<tpc-page-event
+				name="event"
+				firebase-app="{{firebaseApp}}">
+			</tpc-page-event>
+		</iron-pages>
+
 	</template>
 
 	<script>
-
 		Polymer({
 			is: 'tpc-app',
 
