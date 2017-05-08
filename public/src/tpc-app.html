@@ -41,7 +41,8 @@ Page principale de l'application hygie.
 			</tpc-page-home>
 			<tpc-page-event
 				name="event"
-				firebase-app="{{firebaseApp}}">
+				firebase-app="{{firebaseApp}}"
+				event-id={{eventData.eventId}}>
 			</tpc-page-event>
 		</iron-pages>
 
@@ -69,38 +70,7 @@ Page principale de l'application hygie.
 					messagingSenderId: app.messagingSenderId
 				});
 
-				this.queryDatabase();
-			},
-
-			queryDatabase: function () {
-				var xhr = new XMLHttpRequest(),
-					url = app.databaseURL + '/events.json',
-					params = {
-						orderBy: '\"sortKey\"',
-						startAt: '201705071930',
-						limitToFirst: 10
-					};
-
-				// En attente de mieux
-				url += '?orderBy=' + params.orderBy;
-				url += '&startAt=' + params.startAt;
-				url += '&limitToFirst=' + params.limitToFirst;
-
-				xhr.onreadystatechange = this.onProcessRequest.bind(this, xhr);
-				xhr.open("GET", url, true);
-				xhr.send();
-			},
-
-			onProcessRequest: function (xhr, event) {
-				var response;
-
-				if (xhr.readyState === 4 && xhr.status === 200) {
-					response = JSON.parse(xhr.responseText);
-
-					if (response) {
-						this.rawEvents = response;
-					}
-				}
+				this.set('route.path', '/home');
 			}
 		});
 	</script>

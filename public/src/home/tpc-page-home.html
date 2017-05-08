@@ -9,7 +9,18 @@ Page ...
 		<style>
 
 		</style>
+
 		<p>Page home</p>
+
+		<div class="events">
+			<template is="dom-repeat"
+				items="{{events}}"
+				as="event">
+				<ul>
+					<li><a href="/event/{{event.$key}}">{{event.title}}</a></li>
+				</ul>
+			</template>
+		</div>
 	</template>
 
 	<script>
@@ -20,7 +31,60 @@ Page ...
 				firebaseApp: {
 					type: Object,
 					notify: false
+				},
+				rawEvents: {
+					type: Object,
+					notify: true,
+					observer: '_rawEventsChanged'
+				},
+				events: {
+					type: Object,
+					notify: true
 				}
+			},
+
+			ready: function() {
+				this.queryDatabase();
+			},
+
+			queryDatabase: function () {
+				var xhr = new XMLHttpRequest(),
+					url = app.databaseURL + '/events.json',
+					params = {
+						orderBy: '\"sortKey\"',
+						startAt: '201705071930',
+						limitToFirst: 10
+					};
+
+				// En attente de mieux
+				url += '?orderBy=' + params.orderBy;
+				url += '&startAt=' + params.startAt;
+				url += '&limitToFirst=' + params.limitToFirst;
+
+				xhr.onreadystatechange = this.onProcessRequest.bind(this, xhr);
+				xhr.open("GET", url, true);
+				xhr.send();
+			},
+
+			onProcessRequest: function (xhr, event) {
+				var response;
+
+				if (xhr.readyState === 4 && xhr.status === 200) {
+					response = JSON.parse(xhr.responseText);
+
+					if (response) {
+						this.rawEvents = response;
+					}
+				}
+			},
+
+			_rawEventsChanged: function (data) {
+				this.events = Object.keys(data).map(function (key) {
+					var event = data[key];
+					event.$key = key;
+
+					return event;
+				});
 			}
 		});
 	</script>
