@@ -2,20 +2,50 @@
 Page ...
 -->
 <link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/app-layout/app-header-layout/app-header-layout.html">
+<link rel="import" href="../../bower_components/app-layout/app-scroll-effects/effects/waterfall.html">
+<link rel="import" href="../../bower_components/app-layout/app-header/app-header.html">
+<link rel="import" href="../../bower_components/app-layout/app-toolbar/app-toolbar.html">
+<link rel="import" href="../../bower_components/paper-progress/paper-progress.html">
+<link rel="import" href="../lib/marked-import.html">
 
 <dom-module id="tpc-page-event">
 
 	<template>
 		<style>
+			app-toolbar {
+				background-color: #DDD;
+			}
 
+			paper-progress {
+				width: 100%;
+			}
+
+			.event {
+				margin: 0 10px;
+			}
 		</style>
-		<p>Page event</p>
-		<a href="/home">Retour accueil</a>
 
-		<p>{{event.title}}</p>
-		<p>{{event.description}}</p>
-		<p>{{event.date}}</p>
-		<a href="{{event.link}}">Lien</a>
+		<app-header-layout>
+			<app-header reveals condenses effects="waterfall">
+				<app-toolbar>
+					<div>
+						<a href="/home">Retour accueil</a>
+					</div>
+				</app-toolbar>
+				<paper-progress indeterminate class="blue"></paper-progress>
+			</app-header>
+			<div class="event">
+				<h1>{{event.title}}</h1>
+				<p>{{event.organizer}}</p>
+				<p>{{event.date}}</p>
+				<p>{{event.location}}</p>
+				<a href="{{event.link}}">Lien</a>
+
+				<div id="markdown-content"></div>
+			</div>
+		</app-header-layout>
+
 	</template>
 
 	<script>
@@ -58,15 +88,26 @@ Page ...
 
 					if (response) {
 						this.event = response;
+
+						document.getElementById('markdown-content').innerHTML =
+							marked(response.description);
+
+						this.removeProgressBar();
 					}
 				}
 			},
 
-			_eventIdChanged: function () {
-				if (!this.event || this.event.$key !== this.eventId) {
-					this.event = null;
-					this.queryDatabase();
+			removeProgressBar: function () {
+				var elem = document.getElementsByTagName('paper-progress');
+
+				if (elem.length) {
+					elem[0].parentNode.removeChild(elem[0]);
 				}
+			},
+
+			_eventIdChanged: function () {
+				this.event = null;
+				this.queryDatabase();
 			}
 		});
 	</script>

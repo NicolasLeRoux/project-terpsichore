@@ -9,7 +9,10 @@
     "polymer": "^1.7.1",
     "polymerfire": "^0.10.3",
     "iron-pages": "^1.0.9",
-    "app-route": "PolymerElements/app-route#^1.0.1"
+    "app-route": "PolymerElements/app-route#^1.0.1",
+    "marked": "^0.3.6",
+    "app-layout": "^1.0.1",
+    "paper-progress": "^1.0.12"
   },
   "devDependencies": {}
 }
