@@ -53,3 +53,13 @@ Pour une recherche de type:
 On peux imaginer un premier tri côté back puis un plus simple côté front.
 Du genre, tri par date, puis les autres filtrages, localisation et type avec un
 second appel serveur par event à afficher.
+
+
+## Le géoHash
+
+u09ty correspond à 48.8, 2.4
+u09tysevbc2k correspond à 48.848956, 2.400202 (5 rue de Lagny 75020 Paris)
+u09tdxpxqu9p correspond à 48.819019 2.229829 (Gare de Bellevue, 92190 Meudon)
+u09tvqp2vur3 correspond à 48.856353 2.350301 (Paris)
+
+Sans utiliser de backend, ça risque d'être assez complexe...

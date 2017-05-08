@@ -9,6 +9,12 @@ path /events/{eventId} is Event {
 	write() { true }
 }
 
+path /geohash {
+	read() { true }
+	write() { true }
+	index() { "sortKey" }
+}
+
 /*
  * Définition de l'objet 'Event'
  */
@@ -18,6 +24,8 @@ type Event {
 	date: StringDate,
 	sortKey: Number,
 	location: String64,
+	latitude: Number,
+	longitude: Number,
 	link: String256,
 	description: String4096
 }
