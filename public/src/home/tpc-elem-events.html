@@ -1,0 +1,57 @@
+<!--
+Page ...
+-->
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="./tpc-elem-event-item.html">
+
+<dom-module id="tpc-elem-events">
+
+	<template>
+		<style>
+			.events-list {
+				border-top: 1px solid rgba(0, 0, 0, 0.12);
+				border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+				background-color: white;
+				list-style-type: none;
+				padding: 0;
+				margin: 0;
+			}
+
+			.event-item:not(:first-child) {
+				border-top: 1px solid rgba(0, 0, 0, 0.12);
+
+			}
+		</style>
+
+		<ul class="events-list">
+			<template is="dom-repeat"
+				items="{{events}}"
+				as="event">
+				<li class="event-item">
+					<tpc-elem-event-item
+						firebase-app="{{firebaseApp}}"
+						event="{{event}}">
+					</tpc-elem-event-item>
+				</li>
+			</template>
+		</ul>
+
+	</template>
+
+	<script>
+		Polymer({
+			is: 'tpc-elem-events',
+
+			properties: {
+				firebaseApp: {
+					type: Object,
+					notify: false
+				},
+				events: {
+					type: Object,
+					notify: false
+				}
+			}
+		});
+	</script>
+</dom-module>

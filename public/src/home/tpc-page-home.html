@@ -7,6 +7,8 @@ Page ...
 <link rel="import" href="../../bower_components/app-layout/app-header/app-header.html">
 <link rel="import" href="../../bower_components/app-layout/app-toolbar/app-toolbar.html">
 <link rel="import" href="../../bower_components/paper-progress/paper-progress.html">
+<link rel="import" href="../lib/lodash-import.html">
+<link rel="import" href="./tpc-elem-groups-of-events.html">
 
 <dom-module id="tpc-page-home">
 
@@ -20,36 +22,9 @@ Page ...
 				width: 100%;
 			}
 
-			.events {
+			.groups {
 				padding-top: 10px;
 				background-color: #EEE;
-			}
-
-			.events h4 {
-				margin: 10px;
-			}
-
-			.events-list {
-				border-top: 1px solid rgba(0, 0, 0, 0.12);
-				border-bottom: 1px solid rgba(0, 0, 0, 0.12);
-				background-color: white;
-				list-style-type: none;
-				padding: 0;
-				margin: 0;
-			}
-
-			.event-item a {
-				text-decoration: none;
-				color: black;
-			}
-
-			.event-item-content {
-				margin: 0 10px;
-			}
-
-			.event-item:not(:first-child) {
-				border-top: 1px solid rgba(0, 0, 0, 0.12);
-
 			}
 		</style>
 
@@ -62,22 +37,11 @@ Page ...
 				</app-toolbar>
 				<paper-progress indeterminate></paper-progress>
 			</app-header>
-			<div class="events">
-				<h4>Mardi 9 mai</h4>
-				<ul class="events-list">
-					<template is="dom-repeat"
-						items="{{events}}"
-						as="event">
-						<li class="event-item">
-							<a href="/event/{{event.$key}}">
-								<div class="event-item-content">
-									<p>{{event.organizer}}</p>
-									<h3>{{event.title}}</h3>
-								</div>
-							</a>
-						</li>
-					</template>
-				</ul>
+			<div class="groups">
+				<tpc-elem-groups-of-events
+					firebase-app="{{firebaseApp}}"
+					groups-events="{{groupsEvents}}">
+				</tpc-elem-groups-of-events>
 			</div>
 		</app-header-layout>
 
@@ -97,7 +61,7 @@ Page ...
 					notify: true,
 					observer: '_rawEventsChanged'
 				},
-				events: {
+				groupsEvents: {
 					type: Object,
 					notify: true
 				}
@@ -139,12 +103,28 @@ Page ...
 			},
 
 			_rawEventsChanged: function (data) {
-				this.events = Object.keys(data).map(function (key) {
-					var event = data[key];
-					event.$key = key;
+				var groups = [],
+					rawEvents = Object.keys(data).map(function (key) {
+						var event = data[key];
+						event.$key = key;
 
-					return event;
+						return event;
+					});
+
+				var rawGroups = _.groupBy(rawEvents, function (item) {
+					return item.date.slice(0, 10);
 				});
+
+				_.forEach(rawGroups, function (rawGroup) {
+					var group = {
+						date: rawGroup[0].date,
+						events: rawGroup
+					};
+
+					groups.push(group);
+				});
+
+				this.groupsEvents = groups;
 			}
 		});
 	</script>

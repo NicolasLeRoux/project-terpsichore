@@ -1,0 +1,49 @@
+<!--
+Page ...
+-->
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="./tpc-elem-events.html">
+<link rel="import" href="../lib/moment-import.html">
+
+<dom-module id="tpc-elem-groups-of-events">
+
+	<template>
+		<style>
+			h4 {
+				margin: 10px;
+			}
+		</style>
+
+		<template is="dom-repeat"
+			items="{{groupsEvents}}"
+			as="groupEvents">
+			<h4>{{prettifyDate(groupEvents.date)}}</h4>
+			<tpc-elem-events
+				firebase-app="{{firebaseApp}}"
+				events="{{groupEvents.events}}">
+			</tpc-elem-events>
+		</template>
+
+	</template>
+
+	<script>
+		Polymer({
+			is: 'tpc-elem-groups-of-events',
+
+			properties: {
+				firebaseApp: {
+					type: Object,
+					notify: false
+				},
+				groupsEvents: {
+					type: Object,
+					notify: false
+				}
+			},
+
+			prettifyDate: function (date) {
+				return moment(date).format('dddd DD MMMM');
+			}
+		});
+	</script>
+</dom-module>

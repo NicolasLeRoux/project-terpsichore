@@ -13,7 +13,9 @@
     "marked": "^0.3.6",
     "app-layout": "^1.0.1",
     "paper-progress": "^1.0.12",
-    "paper-styles": "^1.2.1"
+    "paper-styles": "^1.2.1",
+    "moment": "^2.18.1",
+    "lodash": "^4.17.4"
   },
   "devDependencies": {}
 }

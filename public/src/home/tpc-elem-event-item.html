@@ -1,0 +1,45 @@
+<!--
+Page ...
+-->
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<dom-module id="tpc-elem-event-item">
+
+	<template>
+		<style>
+			a {
+				text-decoration: none;
+				color: black;
+			}
+
+			.event-item-content {
+				margin: 0 10px;
+			}
+		</style>
+
+		<a href="/event/{{event.$key}}">
+			<div class="event-item-content">
+				<p>{{event.organizer}}</p>
+				<h3>{{event.title}}</h3>
+			</div>
+		</a>
+
+	</template>
+
+	<script>
+		Polymer({
+			is: 'tpc-elem-event-item',
+
+			properties: {
+				firebaseApp: {
+					type: Object,
+					notify: false
+				},
+				event: {
+					type: Object,
+					notify: false
+				}
+			}
+		});
+	</script>
+</dom-module>
