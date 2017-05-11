@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "postinstall": "bower install",
+    "prestart": "npm run bolt",
     "start": "firebase serve",
     "predeploy": "npm run bolt && npm run vulcanize",
     "deploy": "firebase deploy",

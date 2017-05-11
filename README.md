@@ -63,3 +63,20 @@ u09tdxpxqu9p correspond à 48.819019 2.229829 (Gare de Bellevue, 92190 Meudon)
 u09tvqp2vur3 correspond à 48.856353 2.350301 (Paris)
 
 Sans utiliser de backend, ça risque d'être assez complexe...
+
+
+## Algolia
+
+La solution pour avoir une recherche avancée simple à mettre en oeuvre et très
+performante.
+
+Pour pouvoir activer la recherche par géolocalisation:
+
+```json
+"_geoloc": {
+	"lat": 40.639751,
+	"lng": -73.778925
+}
+```
+
+Plus de détails [ici](https://www.algolia.com/doc/guides/geo-search/geo-search-overview/)
