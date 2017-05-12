@@ -80,3 +80,18 @@ Pour pouvoir activer la recherche par géolocalisation:
 ```
 
 Plus de détails [ici](https://www.algolia.com/doc/guides/geo-search/geo-search-overview/)
+
+
+## Alimentation des events
+
+Afin de ne pas passer trop de temps à faire des crowlers pour le web, proposer de la
+review.
+
+Exemple:
+Un onglet permet de créer des events en suivant les différentes étapes. Titre de
+l'event (1), date de l'event (2), lieu de l'event (3)... Une fois l'event saisi,
+il est enregistré dans un répertoire tmp accessible à tous (Dangé). Les events
+sont ensuites à reviewer afin de les ajouter dans la base. Review par un admin
+dans un premier temps, puis par les users dans un second temps.
+
+Par la suite, les crowlers pouront faire des ajouts a reviewer.
