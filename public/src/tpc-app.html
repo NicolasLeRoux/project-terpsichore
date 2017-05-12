@@ -6,6 +6,7 @@ Page principale de l'application hygie.
 <link rel="import" href="../bower_components/app-route/app-location.html">
 <link rel="import" href="../bower_components/app-route/app-route.html">
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../bower_components/app-layout/app-drawer/app-drawer.html">
 <link rel="import" href="./home/tpc-page-home.html">
 <link rel="import" href="./event/tpc-page-event.html">
 
@@ -44,6 +45,11 @@ Page principale de l'application hygie.
 			</tpc-page-event>
 		</iron-pages>
 
+		<app-drawer>
+			<h2>Menu de l'application</h2>
+			<p>TODO</p>
+		</app-drawer>
+
 	</template>
 
 	<script>
@@ -55,6 +61,10 @@ Page principale de l'application hygie.
 					type: Object,
 					notify: true
 				}
+			},
+
+			listeners: {
+				'menu-open': 'openMenu'
 			},
 
 			ready: function() {
@@ -69,6 +79,10 @@ Page principale de l'application hygie.
 				});
 
 				this.set('route.path', '/home');
+			},
+
+			openMenu: function() {
+				this.$$('app-drawer').open();
 			}
 		});
 	</script>
