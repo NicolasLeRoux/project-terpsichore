@@ -1,0 +1,33 @@
+<!--
+Page ...
+-->
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+
+<dom-module id="tpc-page-add-event">
+
+	<template>
+		<style>
+
+		</style>
+
+		<div>
+			<iron-icon icon="icons:arrow-back"></iron-icon>
+			<a href="/home">Retour accueil</a>
+		</div>
+
+	</template>
+
+	<script>
+		Polymer({
+			is: 'tpc-page-add-event',
+
+			properties: {
+				firebaseApp: {
+					type: Object,
+					notify: false
+				}
+			}
+		});
+	</script>
+</dom-module>

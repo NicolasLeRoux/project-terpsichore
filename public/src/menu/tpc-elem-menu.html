@@ -1,0 +1,44 @@
+<!--
+Page ...
+-->
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-item/paper-icon-item.html">
+<link rel="import" href="../../bower_components/paper-menu/paper-menu.html">
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../../bower_components/iron-icons/av-icons.html">
+
+<dom-module id="tpc-elem-menu">
+
+	<template>
+		<style>
+
+		</style>
+
+		<h2>Menu de l'application</h2>
+
+		<paper-menu selected="0">
+			<paper-icon-item>
+				<iron-icon icon="icons:home" item-icon></iron-icon>
+				<a name="home" href="/home">Home</a>
+			</paper-icon-item>
+			<paper-icon-item>
+				<iron-icon icon="av:playlist-add" item-icon></iron-icon>
+				<a name="add" href="/add-event">Add</a>
+			</paper-icon-item>
+		</paper-menu>
+
+	</template>
+
+	<script>
+		Polymer({
+			is: 'tpc-elem-menu',
+
+			properties: {
+				firebaseApp: {
+					type: Object,
+					notify: false
+				}
+			}
+		});
+	</script>
+</dom-module>

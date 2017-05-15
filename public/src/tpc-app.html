@@ -9,6 +9,8 @@ Page principale de l'application hygie.
 <link rel="import" href="../bower_components/app-layout/app-drawer/app-drawer.html">
 <link rel="import" href="./home/tpc-page-home.html">
 <link rel="import" href="./event/tpc-page-event.html">
+<link rel="import" href="./menu/tpc-elem-menu.html">
+<link rel="import" href="./add-event/tpc-page-add-event.html">
 
 <dom-module id="tpc-app">
 
@@ -43,11 +45,15 @@ Page principale de l'application hygie.
 				firebase-app="{{firebaseApp}}"
 				event-id={{eventData.eventId}}>
 			</tpc-page-event>
+			<tpc-page-add-event
+				name="add-event"
+				firebase-app="{{firebaseApp}}">
+			</tpc-page-add-event>
 		</iron-pages>
 
-		<app-drawer>
-			<h2>Menu de l'application</h2>
-			<p>TODO</p>
+		<app-drawer id="navigation-menu">
+			<tpc-elem-menu>
+			</tpc-elem-menu>
 		</app-drawer>
 
 	</template>
@@ -60,6 +66,11 @@ Page principale de l'application hygie.
 				firebaseApp: {
 					type: Object,
 					notify: true
+				},
+				route: {
+					type: String,
+					reflectToAttribute: true,
+					observer: '_routeChanged'
 				}
 			},
 
@@ -83,6 +94,10 @@ Page principale de l'application hygie.
 
 			openMenu: function() {
 				this.$$('app-drawer').open();
+			},
+
+			_routeChanged: function () {
+				this.$['navigation-menu'].close();
 			}
 		});
 	</script>
