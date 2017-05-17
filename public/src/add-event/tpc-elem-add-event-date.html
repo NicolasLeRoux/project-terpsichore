@@ -1,0 +1,77 @@
+<!--
+Page ...
+-->
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-date-picker-item/paper-datetime-picker-item.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-styles/color.html">
+<script src="../../bower_components/moment/locale/fr.js"></script>
+
+<dom-module id="tpc-elem-add-event-date">
+
+	<template>
+		<style>
+			paper-input {
+				margin: 0 10px;
+			}
+
+			paper-button.indigo:not(.disabled) {
+				background-color: var(--paper-indigo-500);
+				color: white;
+			}
+		</style>
+
+		<paper-datetime-picker-item
+			icon="icons:today"
+			placeholder="Ajouter la date et l'heure"
+			date-format="dddd DD MMMM YYYY"
+			time-format="HH:mm"
+			locale="fr"
+			date="{{date}}">
+		</paper-datetime-picker-item>
+
+		<paper-button
+			raised
+			disabled
+			class="indigo disabled"
+			on-tap="onTapButton">
+			Valider
+		</paper-button>
+
+	</template>
+
+	<script>
+		Polymer({
+			is: 'tpc-elem-add-event-date',
+
+			properties: {
+				firebaseApp: {
+					type: Object,
+					notify: false
+				},
+				date: {
+					type: Object,
+					notify: true,
+					observer: '_dateChanged'
+				}
+			},
+
+			_dateChanged: function () {
+				var btn = this.$$('paper-button');
+				// moment(this.date).format("DD/MM/YYYY")
+
+				if (this.date != null) {
+					btn.classList.remove('disabled');
+					btn.removeAttribute('disabled');
+				} else {
+					btn.classList.add('disabled');
+					btn.setAttribute('disabled', true);
+				}
+			},
+
+			onTapButton: function () {
+				this.fire('next');
+			}
+		});
+	</script>
+</dom-module>

@@ -1,0 +1,74 @@
+<!--
+Page ...
+-->
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-styles/color.html">
+
+<dom-module id="tpc-elem-add-event-title">
+
+	<template>
+		<style>
+			paper-input {
+				margin: 0 10px;
+			}
+
+			paper-button.indigo:not(.disabled) {
+				background-color: var(--paper-indigo-500);
+				color: white;
+			}
+		</style>
+
+		<paper-input label="Titre de l'event"
+			char-counter
+			always-float-label
+			maxlength="64"
+			value={{title}}></paper-input>
+
+		<h2>{{title}}</h2>
+
+		<paper-button
+			raised
+			disabled
+			class="indigo disabled"
+			on-tap="onTapButton">
+			Valider
+		</paper-button>
+
+	</template>
+
+	<script>
+		Polymer({
+			is: 'tpc-elem-add-event-title',
+
+			properties: {
+				firebaseApp: {
+					type: Object,
+					notify: false
+				},
+				title: {
+					type: String,
+					notify: true,
+					observer: '_titleChanged'
+				}
+			},
+
+			_titleChanged: function () {
+				var btn = this.$$('paper-button');
+
+				if (this.title != "") {
+					btn.classList.remove('disabled');
+					btn.removeAttribute('disabled');
+				} else {
+					btn.classList.add('disabled');
+					btn.setAttribute('disabled', true);
+				}
+			},
+
+			onTapButton: function () {
+				this.fire('next');
+			}
+		});
+	</script>
+</dom-module>
