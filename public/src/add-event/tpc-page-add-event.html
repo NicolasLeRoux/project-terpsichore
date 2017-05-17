@@ -28,6 +28,12 @@ Page ...
 				<h2>Etape 3</h2>
 			</div>
 		</iron-pages>
+
+		<p on-tap="tmp">
+			<span data-value="0">1</span>
+			<span data-value="1">2</span>
+			<span data-value="2">3</span>
+		</p>
 	</template>
 
 	<script>
@@ -53,6 +59,10 @@ Page ...
 
 			next: function () {
 				this.addEventStep++;
+			},
+
+			tmp: function (event) {
+				this.addEventStep = +event.target.dataset.value;
 			}
 		});
 	</script>
