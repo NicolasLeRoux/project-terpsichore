@@ -11,6 +11,7 @@ Page principale de l'application hygie.
 <link rel="import" href="./event/tpc-page-event.html">
 <link rel="import" href="./menu/tpc-elem-menu.html">
 <link rel="import" href="./add-event/tpc-page-add-event.html">
+<link rel="import" href="./parameter/tpc-page-parameter.html">
 
 <dom-module id="tpc-app">
 
@@ -49,10 +50,14 @@ Page principale de l'application hygie.
 				name="add-event"
 				firebase-app="{{firebaseApp}}">
 			</tpc-page-add-event>
+			<tpc-page-parameter
+				name="parameter">
+			</tpc-page-parameter>
 		</iron-pages>
 
 		<app-drawer id="navigation-menu">
-			<tpc-elem-menu>
+			<tpc-elem-menu
+				page="{{pageData.page}}">
 			</tpc-elem-menu>
 		</app-drawer>
 

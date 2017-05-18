@@ -11,20 +11,44 @@ Page ...
 
 	<template>
 		<style>
+			header {
+				width: 100%;
+				height: 100px;
+				background-color: #7fe2c3;
+			}
 
+			paper-icon-item.selected {
+				background-color: gainsboro;
+			}
+
+			a {
+				color: black;
+				text-decoration: none;
+			}
 		</style>
 
-		<h2>Menu de l'application</h2>
+		<header>
+		</header>
 
 		<paper-menu selected="0">
-			<paper-icon-item>
-				<iron-icon icon="icons:home" item-icon></iron-icon>
-				<a name="home" href="/home">Home</a>
-			</paper-icon-item>
-			<paper-icon-item>
-				<iron-icon icon="av:playlist-add" item-icon></iron-icon>
-				<a name="add" href="/add-event">Add</a>
-			</paper-icon-item>
+			<a href="/home">
+				<paper-icon-item id="menu-home">
+					<iron-icon icon="icons:home" item-icon></iron-icon>
+					Home
+				</paper-icon-item>
+			</a>
+			<a href="/add-event">
+				<paper-icon-item id="menu-add-event">
+					<iron-icon icon="av:playlist-add" item-icon></iron-icon>
+					Add
+				</paper-icon-item>
+			</a>
+			<a href="/parameter">
+				<paper-icon-item id="menu-parameter">
+					<iron-icon icon="icons:settings" item-icon></iron-icon>
+					Paramètres
+				</paper-icon-item>
+			</a>
 		</paper-menu>
 
 	</template>
@@ -37,6 +61,22 @@ Page ...
 				firebaseApp: {
 					type: Object,
 					notify: false
+				},
+				page: {
+					type: String,
+					reflectToAttribute: true,
+					observer: '_pageChanged'
+				}
+			},
+
+			_pageChanged: function () {
+				var elem = this.$['menu-' + this.page];
+
+				if (elem) {
+					_.forEach(this.getElementsByClassName('selected'), function (item) {
+						item.classList.remove('selected');
+					});
+					elem.classList.add('selected');
 				}
 			}
 		});
