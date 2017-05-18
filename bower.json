@@ -24,7 +24,9 @@
     "paper-item": "^1.2.2",
     "paper-input": "^2.0.0",
     "paper-button": "^2.0.0",
-    "paper-date-picker-item": "^1.4.0"
+    "paper-date-picker-item": "^1.4.0",
+    "paper-toggle-button": "^2.0.0",
+    "paper-slider": "^2.0.0"
   },
   "devDependencies": {}
 }

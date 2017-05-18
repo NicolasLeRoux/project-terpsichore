@@ -3,7 +3,9 @@ Page ...
 -->
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
-<link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../../bower_components/iron-icons/device-icons.html">
+<link rel="import" href="../../bower_components/paper-toggle-button/paper-toggle-button.html">
+<link rel="import" href="../../bower_components/paper-slider/paper-slider.html">
 
 <dom-module id="tpc-page-parameter">
 
@@ -19,6 +21,30 @@ Page ...
 
 		<h2>Paramètres</h2>
 
+		<h3>Localisation</h3>
+
+		<!--<iron-icon icon="device:gps-fixed"></iron-icon>-->
+		<paper-toggle-button
+			id="geolocation-toggle"
+			noink
+			checked="{{isGeolocationAllowed}}">
+			Utiliser ma position
+		</paper-toggle-button>
+
+		<paper-slider
+			class="red"
+			value="{{rayon}}"
+			min="1"
+			max="50"
+			pin></paper-slider>
+		<p>{{rayon}} km</p>
+
+		<h3>Danse</h3>
+		<paper-toggle-button noink>Lindy hop</paper-toggle-button>
+		<paper-toggle-button noink>Rock</paper-toggle-button>
+		<paper-toggle-button noink>Salsa</paper-toggle-button>
+		<paper-toggle-button noink>West coast swing</paper-toggle-button>
+
 	</template>
 
 	<script>
@@ -29,7 +55,79 @@ Page ...
 				firebaseApp: {
 					type: Object,
 					notify: false
+				},
+				rayon: {
+					type: Number,
+					value: 8,
+					notify: true
+				},
+				isGeolocationAllowed: {
+					type: Boolean,
+					value: false,
+					notify: true,
+					observer: '_isGeolocationAllowedChanged'
 				}
+			},
+
+			ready: function () {
+				if (navigator.permissions) {
+					navigator.permissions.query({name: 'geolocation'})
+						.then(_.bind(function(permissionStatus) {
+							switch (permissionStatus.state) {
+								case 'granted':
+									this.isGeolocationAllowed = true;
+									this.$['geolocation-toggle'].classList.add('disabled');
+									this.$['geolocation-toggle'].setAttribute('disabled', true);
+									break;
+								case 'prompt':
+
+									break;
+								default:
+									this.isGeolocationAllowed = false;
+									this.$['geolocation-toggle'].classList.add('disabled');
+									this.$['geolocation-toggle'].setAttribute('disabled', true);
+							}
+						}, this));
+				}
+			},
+
+			_isGeolocationAllowedChanged: function () {
+				if (this.isGeolocationAllowed) {
+					navigator.geolocation.getCurrentPosition(
+						_.bind(this.showPosition, this),
+						_.bind(this.showError, this));
+				}
+			},
+
+			showPosition: function (position) {
+				this.$['geolocation-toggle'].classList.add('disabled');
+				this.$['geolocation-toggle'].setAttribute('disabled', true);
+
+				console.info("Latitude: " + position.coords.latitude + " - Longitude: " + position.coords.longitude);
+			},
+
+			showError: function (error) {
+				switch(error.code) {
+					case error.PERMISSION_DENIED:
+						console.warn("User denied the request for Geolocation.");
+						this.isGeolocationAllowed = false;
+						this.$['geolocation-toggle'].classList.add('disabled');
+						this.$['geolocation-toggle'].setAttribute('disabled', true);
+						break;
+					case error.POSITION_UNAVAILABLE:
+						console.warn("Location information is unavailable.");
+						break;
+					case error.TIMEOUT:
+						console.warn("The request to get user location timed out.");
+						break;
+					case error.UNKNOWN_ERROR:
+						console.warn("An unknown error occurred.");
+						break;
+				}
+			},
+
+			tmp: function () {
+				console.log('Hello world');
 			}
 		});
 	</script>
