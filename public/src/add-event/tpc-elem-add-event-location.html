@@ -1,0 +1,148 @@
+<!--
+Page ...
+-->
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-styles/color.html">
+<link rel="import" href="../../bower_components/google-map/google-map.html">
+<link rel="import" href="../../bower_components/google-map/google-map-marker.html">
+<link rel="import" href="../../bower_components/google-map/google-map-search.html">
+<link rel="import" href="../../bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="../../bower_components/paper-item/paper-item.html">
+
+<dom-module id="tpc-elem-add-event-location">
+
+	<template>
+		<style>
+			paper-input {
+				margin: 0 10px;
+			}
+
+			paper-listbox {
+				height: 200px;
+				overflow: auto;
+			}
+
+			google-map {
+				height: 300px;
+			}
+
+			paper-button.indigo:not(.disabled) {
+				background-color: var(--paper-indigo-500);
+				color: white;
+			}
+		</style>
+
+		<paper-input label="Latitude"
+			always-float-label
+			value={{latitude}}>
+		</paper-input>
+
+		<paper-input label="Longitude"
+			always-float-label
+			value={{longitude}}>
+		</paper-input>
+
+		<!--
+		<paper-input label="Localisation"
+			always-float-label
+			value={{location}}>
+		</paper-input>
+
+		<google-map-search map="[[map]]" query="{{location}}" results="{{results}}">
+		</google-map-search>
+
+		<paper-listbox selected="{{selectedAddressIndex}}">
+			<template is="dom-repeat" items="{{results}}" as="item">
+				<paper-item>
+					<h4>{{item.name}}</h4>
+					<p>{{item.formatted_address}}</p>
+				</paper-item>
+			</template>
+		</paper-listbox>
+
+		<google-map api-key="AIzaSyDb1Q9KJu_8qZ7SMnhtZKb4JcihqTexyzI"
+			map="{{map}}"
+			zoom="15"
+			latitude="{{selectedAddress.latitude}}"
+			longitude="{{selectedAddress.longitude}}">
+			<google-map-marker latitude="{{selectedAddress.latitude}}"
+				longitude="{{selectedAddress.longitude}}">
+				<h2>{{selectedAddress.name}}</h2>
+				<span>{{selectedAddress.formatted_address}}</span>
+			</google-map-marker>
+		</google-map>
+	-->
+
+		<paper-button
+			raised
+			disabled
+			class="indigo disabled"
+			on-tap="onTapButton">
+			Valider
+		</paper-button>
+
+	</template>
+
+	<script>
+		Polymer({
+			is: 'tpc-elem-add-event-location',
+
+			properties: {
+				firebaseApp: {
+					type: Object,
+					notify: false
+				},
+				selectedAddressIndex: {
+					type: String,
+					notify: true,
+					observer: '_onIndexChanged'
+				},
+				selectedAddress: {
+					type: Object,
+					notify: true
+				},
+				latitude: {
+					type: Number,
+					notify: true,
+					observer: '_onLatitudeChanged'
+				},
+				longitude: {
+					type: Number,
+					notify: true,
+					observer: '_onLongitudeChanged'
+				}
+			},
+
+			_onIndexChanged: function () {
+				this.selectedAddress = this.results[this.selectedAddressIndex];
+				console.log(this.selectedAddress);
+			},
+
+			onTapButton: function () {
+				this.fire('next');
+			},
+
+			_onLatitudeChanged: function (latitude) {
+				this._todo();
+			},
+
+			_onLongitudeChanged: function (longitude) {
+				this._todo();
+			},
+
+			_todo: function () {
+				var btn = this.$$('paper-button');
+
+				if (this.latitude && this.longitude) {
+					btn.classList.remove('disabled');
+					btn.removeAttribute('disabled');
+				} else {
+					btn.classList.add('disabled');
+					btn.setAttribute('disabled', true);
+				}
+			}
+		});
+	</script>
+</dom-module>

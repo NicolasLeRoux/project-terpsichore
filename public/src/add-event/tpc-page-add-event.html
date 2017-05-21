@@ -6,6 +6,7 @@ Page ...
 <link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="./tpc-elem-add-event-title.html">
 <link rel="import" href="./tpc-elem-add-event-date.html">
+<link rel="import" href="./tpc-elem-add-event-location.html">
 
 <dom-module id="tpc-page-add-event">
 
@@ -24,8 +25,10 @@ Page ...
 			</tpc-elem-add-event-title>
 			<tpc-elem-add-event-date id="add-event-step-2">
 			</tpc-elem-add-event-date>
+			<tpc-elem-add-event-location id="add-event-step-3">
+			</tpc-elem-add-event-location>
 			<div>
-				<h2>Etape 3</h2>
+				<h2>Etape 4</h2>
 			</div>
 		</iron-pages>
 
@@ -33,6 +36,7 @@ Page ...
 			<span data-value="0">1</span>
 			<span data-value="1">2</span>
 			<span data-value="2">3</span>
+			<span data-value="3">4</span>
 		</p>
 	</template>
 
@@ -47,14 +51,15 @@ Page ...
 				},
 				addEventStep: {
 					type: Number,
-					value: 0,
+					value: 2,
 					notify: false
 				}
 			},
 
 			listeners: {
 				'add-event-step-1.next': 'next',
-				'add-event-step-2.next': 'next'
+				'add-event-step-2.next': 'next',
+				'add-event-step-3.next': 'next'
 			},
 
 			next: function () {
