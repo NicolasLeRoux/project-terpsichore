@@ -1,0 +1,51 @@
+<!--
+Page ...
+-->
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-styles/color.html">
+<link rel="import" href="../../bower_components/paper-toggle-button/paper-toggle-button.html">
+
+<dom-module id="tpc-elem-add-event-keyword">
+
+	<template>
+		<style>
+			paper-button.indigo:not(.disabled) {
+				background-color: var(--paper-indigo-500);
+				color: white;
+			}
+		</style>
+
+		<h3>Danse</h3>
+
+		<paper-toggle-button noink>Lindy hop</paper-toggle-button>
+		<paper-toggle-button noink>Rock</paper-toggle-button>
+		<paper-toggle-button noink>Salsa</paper-toggle-button>
+		<paper-toggle-button noink>West coast swing</paper-toggle-button>
+
+		<paper-button
+			raised
+			class="indigo"
+			on-tap="onTapButton">
+			Valider
+		</paper-button>
+
+	</template>
+
+	<script>
+		Polymer({
+			is: 'tpc-elem-add-event-keyword',
+
+			properties: {
+				firebaseApp: {
+					type: Object,
+					notify: false
+				}
+			},
+
+			onTapButton: function () {
+				this.fire('next');
+			}
+		});
+	</script>
+</dom-module>

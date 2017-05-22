@@ -1,0 +1,58 @@
+<!--
+Page ...
+-->
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-input/paper-textarea.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-styles/color.html">
+
+<dom-module id="tpc-elem-add-event-description">
+
+	<template>
+		<style>
+			paper-input {
+				margin: 0 10px;
+			}
+
+			paper-button.indigo:not(.disabled) {
+				background-color: var(--paper-indigo-500);
+				color: white;
+			}
+		</style>
+
+		<paper-textarea label="descrition de l'event"
+			char-counter
+			always-float-label
+			maxlength="4096"
+			value={{descrition}}></paper-textarea>
+
+		<paper-button
+			raised
+			class="indigo"
+			on-tap="onTapButton">
+			Valider
+		</paper-button>
+
+	</template>
+
+	<script>
+		Polymer({
+			is: 'tpc-elem-add-event-description',
+
+			properties: {
+				firebaseApp: {
+					type: Object,
+					notify: false
+				},
+				description: {
+					type: String,
+					notify: true
+				}
+			},
+
+			onTapButton: function () {
+				this.fire('next');
+			}
+		});
+	</script>
+</dom-module>
