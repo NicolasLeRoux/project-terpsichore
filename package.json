@@ -10,6 +10,7 @@
     "predeploy": "npm run bolt && npm run vulcanize",
     "deploy": "firebase deploy",
     "deploy:rules": "firebase deploy --only database",
+    "deploy:functions": "firebase deploy --only functions",
     "login": "firebase login --reauth",
     "bolt": "firebase-bolt database.rules.bolt",
     "vulcanize": "vulcanize --inline-scripts --inline-css --strip-comments public/src/tpc-app.html > public/tpc-app.vulcanised.html"
@@ -33,5 +34,9 @@
     "firebase-tools": "^3.2.1",
     "vulcanize": "^1.15.3",
     "write": "^0.3.2"
+  },
+  "dependencies": {
+    "firebase-admin": "^5.0.0",
+    "firebase-functions": "^0.5.7"
   }
 }
