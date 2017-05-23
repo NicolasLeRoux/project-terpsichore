@@ -121,7 +121,10 @@ Page ...
 			},
 
 			onTapButton: function () {
-				this.fire('next');
+				this.fire('next', {
+					latitude: this.latitude,
+					longitude: this.longitude
+				});
 			},
 
 			_onLatitudeChanged: function (latitude) {

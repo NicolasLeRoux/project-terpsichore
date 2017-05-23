@@ -40,11 +40,17 @@ Page ...
 				firebaseApp: {
 					type: Object,
 					notify: false
+				},
+				keyword: {
+					type: Object,
+					notify: false
 				}
 			},
 
 			onTapButton: function () {
-				this.fire('next');
+				this.fire('next', {
+					keyword: this.keyword
+				});
 			}
 		});
 	</script>

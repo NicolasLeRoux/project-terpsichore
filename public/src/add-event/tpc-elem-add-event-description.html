@@ -51,7 +51,9 @@ Page ...
 			},
 
 			onTapButton: function () {
-				this.fire('next');
+				this.fire('next', {
+					description: this.description
+				});
 			}
 		});
 	</script>

@@ -70,7 +70,9 @@ Page ...
 			},
 
 			onTapButton: function () {
-				this.fire('next');
+				this.fire('next', {
+					date: moment(this.date).format()
+				});
 			}
 		});
 	</script>

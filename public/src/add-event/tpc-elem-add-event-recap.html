@@ -15,8 +15,9 @@ Page ...
 			}
 		</style>
 
-		<h2>Mon récap !!!</h2>
-		<p>TODO</p>
+		<h2>{{myEvent.title}}</h2>
+		<p>{{myEvent.date}}</p>
+		<p>{{myEvent.description}}</p>
 
 		<paper-button
 			raised
@@ -35,6 +36,10 @@ Page ...
 				firebaseApp: {
 					type: Object,
 					notify: false
+				},
+				myEvent: {
+					type: Object,
+					notify: true
 				}
 			},
 

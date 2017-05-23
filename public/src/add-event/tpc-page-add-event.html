@@ -53,7 +53,8 @@ Page ...
 			</tpc-elem-add-event-keyword>
 			<tpc-elem-add-event-description id="add-event-step-5">
 			</tpc-elem-add-event-description>
-			<tpc-elem-add-event-recap  id="add-event-step-6">
+			<tpc-elem-add-event-recap  id="add-event-step-6"
+				my-event="{{myEvent}}">
 			</tpc-elem-add-event-recap>
 		</iron-pages>
 
@@ -104,6 +105,11 @@ Page ...
 					type: Number,
 					value: 0,
 					notify: false
+				},
+				myEvent: {
+					type: Number,
+					value: {},
+					notify: true
 				}
 			},
 
@@ -116,7 +122,8 @@ Page ...
 				'add-event-step-6.next': 'sendNewEvent'
 			},
 
-			goToNextStep: function () {
+			goToNextStep: function (evt, data) {
+				this.myEvent = _.extend(this.myEvent, data);
 				this.addEventStep++;
 			},
 
@@ -124,13 +131,13 @@ Page ...
 				var xhr = new XMLHttpRequest(),
 					url = app.databaseURL + '/unchecked-events.json',
 					data = {
-						organizer: 'Temple du swing',
-						title: 'Soirée WCS au Bal Rock, Paris',
-						date: '2017-05-24T20:00:00+02:00',
-						sortKey: 201705242000,
-						location: '5 rue de Lagny 75020 Paris',
-						latitude: 48.848956,
-						longitude: 2.400202,
+						organizer: 'Todo',
+						title: this.myEvent.title,
+						date: this.myEvent.date,
+						sortKey: +moment(this.myEvent.date).format('YYYYMMDDHHmm'),
+						location: 'TODO',
+						latitude: +this.myEvent.latitude,
+						longitude: +this.myEvent.longitude,
 						link: null,
 						description: 'TODO'
 					};
