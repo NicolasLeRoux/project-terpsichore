@@ -9,6 +9,7 @@
     "start": "firebase serve",
     "predeploy": "npm run bolt && npm run vulcanize",
     "deploy": "firebase deploy",
+    "deploy:rules": "firebase deploy --only database",
     "login": "firebase login --reauth",
     "bolt": "firebase-bolt database.rules.bolt",
     "vulcanize": "vulcanize --inline-scripts --inline-css --strip-comments public/src/tpc-app.html > public/tpc-app.vulcanised.html"
