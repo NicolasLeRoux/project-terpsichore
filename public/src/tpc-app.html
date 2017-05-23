@@ -36,7 +36,11 @@ Page principale de l'application hygie.
 			tail="{{eventDataTail}}">
 		</app-route>
 
-		<iron-pages role="main" selected="{{pageData.page}}" attr-for-selected="name">
+		<iron-pages
+			role="main"
+			selected="{{pageData.page}}"
+			attr-for-selected="name"
+			fallback-selection="home">
 			<tpc-page-home
 				name="home"
 				firebase-app="{{firebaseApp}}">
