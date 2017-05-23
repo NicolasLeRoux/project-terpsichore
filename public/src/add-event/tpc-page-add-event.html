@@ -11,6 +11,7 @@ Page ...
 <link rel="import" href="./tpc-elem-add-event-location.html">
 <link rel="import" href="./tpc-elem-add-event-description.html">
 <link rel="import" href="./tpc-elem-add-event-keyword.html">
+<link rel="import" href="./tpc-elem-add-event-recap.html">
 
 <dom-module id="tpc-page-add-event">
 
@@ -52,9 +53,8 @@ Page ...
 			</tpc-elem-add-event-keyword>
 			<tpc-elem-add-event-description id="add-event-step-5">
 			</tpc-elem-add-event-description>
-			<div>
-				<h2>Etape 6</h2>
-			</div>
+			<tpc-elem-add-event-recap  id="add-event-step-6">
+			</tpc-elem-add-event-recap>
 		</iron-pages>
 
 		<div class="step">
@@ -108,14 +108,40 @@ Page ...
 			},
 
 			listeners: {
-				'add-event-step-1.next': 'next',
-				'add-event-step-2.next': 'next',
-				'add-event-step-3.next': 'next',
-				'add-event-step-4.next': 'next'
+				'add-event-step-1.next': 'goToNextStep',
+				'add-event-step-2.next': 'goToNextStep',
+				'add-event-step-3.next': 'goToNextStep',
+				'add-event-step-4.next': 'goToNextStep',
+				'add-event-step-5.next': 'goToNextStep',
+				'add-event-step-6.next': 'sendNewEvent'
 			},
 
-			next: function () {
+			goToNextStep: function () {
 				this.addEventStep++;
+			},
+
+			sendNewEvent: function () {
+				var xhr = new XMLHttpRequest(),
+					url = app.databaseURL + '/unchecked-events.json',
+					data = {
+						organizer: 'Temple du swing',
+						title: 'Soirée WCS au Bal Rock, Paris',
+						date: '2017-05-24T20:00:00+02:00',
+						sortKey: 201705242000,
+						location: '5 rue de Lagny 75020 Paris',
+						latitude: 48.848956,
+						longitude: 2.400202,
+						link: null,
+						description: 'TODO'
+					};
+
+				xhr.onreadystatechange = this.onProcessRequest.bind(this, xhr);
+				xhr.open("POST", url, true);
+				xhr.send(JSON.stringify(data));
+			},
+
+			onProcessRequest: function () {
+
 			},
 
 			switchStep: function (event) {

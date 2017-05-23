@@ -9,24 +9,20 @@ path /events/{eventId} is Event {
 	write() { true }
 }
 
-path /geohash {
+path /unchecked-events/{eventId} is Event {
 	read() { true }
 	write() { true }
-	index() { "sortKey" }
 }
 
-/*
- * Définition de l'objet 'Event'
- */
 type Event {
-	organizer: String32,
+	organizer: String32 | Null,
 	title: String64,
 	date: StringDate,
 	sortKey: Number,
-	location: String64,
+	location: String64 | Null,
 	latitude: Number,
 	longitude: Number,
-	link: String256,
+	link: String256 | Null,
 	description: String4096
 }
 

@@ -1,0 +1,46 @@
+<!--
+Page ...
+-->
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-styles/color.html">
+
+<dom-module id="tpc-elem-add-event-recap">
+
+	<template>
+		<style>
+			paper-button.indigo:not(.disabled) {
+				background-color: var(--paper-indigo-500);
+				color: white;
+			}
+		</style>
+
+		<h2>Mon récap !!!</h2>
+		<p>TODO</p>
+
+		<paper-button
+			raised
+			class="indigo"
+			on-tap="onTapButton">
+			Valider
+		</paper-button>
+
+	</template>
+
+	<script>
+		Polymer({
+			is: 'tpc-elem-add-event-recap',
+
+			properties: {
+				firebaseApp: {
+					type: Object,
+					notify: false
+				}
+			},
+
+			onTapButton: function () {
+				this.fire('next');
+			}
+		});
+	</script>
+</dom-module>
