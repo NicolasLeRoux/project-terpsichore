@@ -2,6 +2,11 @@
 Page ...
 -->
 <link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/app-layout/app-header-layout/app-header-layout.html">
+<link rel="import" href="../../bower_components/app-layout/app-scroll-effects/effects/waterfall.html">
+<link rel="import" href="../../bower_components/app-layout/app-header/app-header.html">
+<link rel="import" href="../../bower_components/app-layout/app-toolbar/app-toolbar.html">
+<link rel="import" href="../../bower_components/paper-progress/paper-progress.html">
 <link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
 <link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
@@ -17,6 +22,14 @@ Page ...
 
 	<template>
 		<style>
+			app-toolbar {
+				background-color: #f7f7f7;
+			}
+
+			paper-progress {
+				width: 100%;
+			}
+
 			.step {
 				margin-top: 20px;
 				display: flex;
@@ -37,59 +50,67 @@ Page ...
 			}
 		</style>
 
-		<div>
-			<iron-icon icon="icons:arrow-back"></iron-icon>
-			<a href="/home">Retour accueil</a>
-		</div>
+		<app-header-layout>
+			<app-header reveals condenses effects="waterfall">
+				<app-toolbar>
+					<a href="/home">
+						<paper-icon-button icon="icons:arrow-back"></paper-icon-button>
+					</a>
+					<div main-title>Retour accueil</div>
+					<!--<paper-progress indeterminate bottom-item></paper-progress>-->
+				</app-toolbar>
 
-		<iron-pages selected="{{addEventStep}}">
-			<tpc-elem-add-event-title id="add-event-step-1">
-			</tpc-elem-add-event-title>
-			<tpc-elem-add-event-date id="add-event-step-2">
-			</tpc-elem-add-event-date>
-			<tpc-elem-add-event-location id="add-event-step-3">
-			</tpc-elem-add-event-location>
-			<tpc-elem-add-event-keyword id="add-event-step-4">
-			</tpc-elem-add-event-keyword>
-			<tpc-elem-add-event-description id="add-event-step-5">
-			</tpc-elem-add-event-description>
-			<tpc-elem-add-event-recap  id="add-event-step-6"
-				my-event="{{myEvent}}">
-			</tpc-elem-add-event-recap>
-		</iron-pages>
+			</app-header>
+			<iron-pages selected="{{addEventStep}}">
+				<tpc-elem-add-event-title id="add-event-step-1">
+				</tpc-elem-add-event-title>
+				<tpc-elem-add-event-date id="add-event-step-2">
+				</tpc-elem-add-event-date>
+				<tpc-elem-add-event-location id="add-event-step-3">
+				</tpc-elem-add-event-location>
+				<tpc-elem-add-event-keyword id="add-event-step-4">
+				</tpc-elem-add-event-keyword>
+				<tpc-elem-add-event-description id="add-event-step-5">
+				</tpc-elem-add-event-description>
+				<tpc-elem-add-event-recap  id="add-event-step-6"
+					my-event="{{myEvent}}">
+				</tpc-elem-add-event-recap>
+			</iron-pages>
 
-		<div class="step">
-			<div data-value="0" on-tap="switchStep">
-				<p>
-					<iron-icon icon="editor:mode-edit"></iron-icon>
-				</p>
+			<div class="step">
+				<div data-value="0" on-tap="switchStep">
+					<p>
+						<iron-icon icon="editor:mode-edit"></iron-icon>
+					</p>
+				</div>
+				<div data-value="1" on-tap="switchStep">
+					<p>
+						2
+					</p>
+				</div>
+				<div data-value="2" on-tap="switchStep">
+					<p>
+						3
+					</p>
+				</div>
+				<div data-value="3" on-tap="switchStep">
+					<p>
+						4
+					</p>
+				</div>
+				<div data-value="4" on-tap="switchStep">
+					<p>
+						5
+					</p>
+				</div>
+				<div data-value="5" on-tap="switchStep">
+					<p>
+						6
+					</p>
+				</div>
 			</div>
-			<div data-value="1" on-tap="switchStep">
-				<p>
-					2
-				</p>
-			</div>
-			<div data-value="2" on-tap="switchStep">
-				<p>
-					3
-				</p>
-			</div>
-			<div data-value="3" on-tap="switchStep">
-				<p>
-					4
-				</p>
-			</div>
-			<div data-value="4" on-tap="switchStep">
-				<p>
-					5
-				</p>
-			</div>
-			<div data-value="5" on-tap="switchStep">
-				<p>
-					6
-				</p>
-			</div>
-		</div>
+		</app-header-layout>
+
 	</template>
 
 	<script>

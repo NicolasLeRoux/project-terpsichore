@@ -8,9 +8,8 @@ Page ...
 <link rel="import" href="../../bower_components/app-layout/app-toolbar/app-toolbar.html">
 <link rel="import" href="../../bower_components/paper-progress/paper-progress.html">
 <link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
-<link rel="import" href="../lib/marked-import.html">
 
-<dom-module id="tpc-page-event">
+<dom-module id="tpc-page-school">
 
 	<template>
 		<style>
@@ -22,61 +21,62 @@ Page ...
 				width: 100%;
 			}
 
-			.event {
-				margin: 0 10px;
+			.content {
+				margin-top: 20px;
+			}
+
+			li {
+				margin-bottom: 10px;
 			}
 		</style>
 
 		<app-header-layout>
 			<app-header reveals condenses effects="waterfall">
 				<app-toolbar>
-					<a href="/home">
-						<paper-icon-button icon="icons:arrow-back"></paper-icon-button>
-					</a>
-					<div main-title>Retour accueil</div>
+					<paper-icon-button
+						icon="menu"
+						on-tap="onTapBoutonMenu">
+					</paper-icon-button>
+					<div main-title>School</div>
 					<!--<paper-progress indeterminate bottom-item></paper-progress>-->
 				</app-toolbar>
 
 			</app-header>
-			<div class="event">
-				<h1>{{event.title}}</h1>
-				<p>{{event.organizer}}</p>
-				<p>{{event.date}}</p>
-				<p>{{event.location}}</p>
-				<a href="{{event.link}}">Lien</a>
-
-				<div id="markdown-content"></div>
+			<div class="content">
+				<template is="dom-repeat"
+					items="{{organizers}}"
+					as="organizer">
+					<li>
+						<b>{{organizer.name}}</b>, {{organizer.city}}
+					</li>
+				</template>
 			</div>
 		</app-header-layout>
-
 	</template>
 
 	<script>
 		Polymer({
-			is: 'tpc-page-event',
+			is: 'tpc-page-school',
 
 			properties: {
 				firebaseApp: {
 					type: Object,
 					notify: false
 				},
-				eventId: {
+				organizers: {
 					type: Object,
-					notify: true,
-					observer: '_eventIdChanged'
-				},
-				event: {
-					type: Object,
-					notify: true
+					notify: false
 				}
+			},
+
+			ready: function () {
+				this.queryDatabase();
 			},
 
 			queryDatabase: function () {
 				var xhr = new XMLHttpRequest(),
 					url = app.databaseURL +
-						'/events/' +
-						this.eventId +
-						'.json';
+						'/organizers.json';
 
 				xhr.onreadystatechange = this.onProcessRequest.bind(this, xhr);
 				xhr.open("GET", url, true);
@@ -90,27 +90,18 @@ Page ...
 					response = JSON.parse(xhr.responseText);
 
 					if (response) {
-						this.event = response;
+						this.organizers = Object.keys(response).map(function (key) {
+							var obj = response[key];
+							obj._id = key;
 
-						document.getElementById('markdown-content').innerHTML =
-							marked(response.description);
-
-						//this.removeProgressBar();
+							return obj;
+						});
 					}
 				}
 			},
 
-			removeProgressBar: function () {
-				var elem = document.getElementsByTagName('paper-progress');
-
-				if (elem.length) {
-					elem[0].parentNode.removeChild(elem[0]);
-				}
-			},
-
-			_eventIdChanged: function () {
-				this.event = null;
-				this.queryDatabase();
+			onTapBoutonMenu: function () {
+				this.fire('menu-open');
 			}
 		});
 	</script>

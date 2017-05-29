@@ -12,6 +12,7 @@ Page principale de l'application hygie.
 <link rel="import" href="./menu/tpc-elem-menu.html">
 <link rel="import" href="./add-event/tpc-page-add-event.html">
 <link rel="import" href="./parameter/tpc-page-parameter.html">
+<link rel="import" href="./school/tpc-page-school.html">
 
 <dom-module id="tpc-app">
 
@@ -50,6 +51,10 @@ Page principale de l'application hygie.
 				firebase-app="{{firebaseApp}}"
 				event-id={{eventData.eventId}}>
 			</tpc-page-event>
+			<tpc-page-school
+				name="school"
+				firebase-app="{{firebaseApp}}">
+			</tpc-page-school>
 			<tpc-page-add-event
 				name="add-event"
 				firebase-app="{{firebaseApp}}">
