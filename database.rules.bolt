@@ -26,15 +26,16 @@ path /organizers/{organizerId} is Organizer {
 }
 
 type Event {
-	organizer: String32 | Null,
+	organizerId: String32 | Null,
+	organizerName: String32 | Null,
 	title: String64,
-	date: StringDate,
+	dateDebut: StringDate,
+	dateFin: StringDate,
 	sortKey: Number,
-	location: String64 | Null,
-	latitude: Number,
-	longitude: Number,
+	location: Location,
 	link: String256 | Null,
-	description: String4096
+	description: String4096,
+	facebookId: String32 | Null
 }
 
 type Organizer {
@@ -43,6 +44,16 @@ type Organizer {
 	facebookId: String32 | Null,
 	website: String64 | Null,
 	facebook: String64 | Null
+}
+
+type Location {
+	name: String64,
+	city: String32,
+	country: String32,
+	latitude: Number,
+	longitude: Number,
+	street: String64 | Null,
+	zip: StringZip
 }
 
 type String32 extends String {
@@ -63,4 +74,8 @@ type String4096 extends String {
 
 type StringDate extends String {
 	validate() { this.length == 25 }
+}
+
+type StringZip extends String {
+	validate() { this.length == 5 }
 }
