@@ -40,10 +40,9 @@ Page ...
 			</app-header>
 			<div class="event">
 				<h1>{{event.title}}</h1>
-				<p>{{event.organizer}}</p>
-				<p>{{event.date}}</p>
-				<p>{{event.location}}</p>
-				<a href="{{event.link}}">Lien</a>
+				<p>{{event.organizerName}}</p>
+				<p>{{event.startTime}}</p>
+				<p>{{event.location.name}}, {{event.location.street}} {{event.location.zip}} {{event.location.city}}</p>
 
 				<div id="markdown-content"></div>
 			</div>

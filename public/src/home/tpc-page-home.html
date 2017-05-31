@@ -140,7 +140,7 @@ Page ...
 					});
 
 				var rawGroups = _.groupBy(rawEvents, function (item) {
-					return item.date.slice(0, 10);
+					return item.startTime.slice(0, 10);
 				});
 
 				_.forEach(rawGroups, function (rawGroup) {
