@@ -13,6 +13,7 @@ Page ...
 <link rel="import" href="../lib/lodash-import.html">
 <link rel="import" href="../lib/algoliasearch-import.html">
 <link rel="import" href="./tpc-elem-groups-of-events.html">
+<link rel="import" href="./tpc-elem-event-list.html">
 
 <dom-module id="tpc-page-home">
 
@@ -28,11 +29,6 @@ Page ...
 
 			paper-progress {
 				width: 100%;
-			}
-
-			.groups {
-				padding-top: 10px;
-				background-color: #EEE;
 			}
 		</style>
 
@@ -50,11 +46,11 @@ Page ...
 				</app-toolbar>
 				<!--<paper-progress indeterminate></paper-progress>-->
 			</app-header>
-			<div class="groups">
-				<tpc-elem-groups-of-events
+			<div class="list">
+				<tpc-elem-event-list
 					firebase-app="{{firebaseApp}}"
-					groups-events="{{groupsEvents}}">
-				</tpc-elem-groups-of-events>
+					events="{{events}}">
+				</tpc-elem-event-list>
 			</div>
 		</app-header-layout>
 
@@ -74,8 +70,8 @@ Page ...
 					notify: true,
 					observer: '_rawEventsChanged'
 				},
-				groupsEvents: {
-					type: Object,
+				events: {
+					type: Array,
 					notify: true
 				}
 			},
@@ -131,28 +127,12 @@ Page ...
 			},
 
 			_rawEventsChanged: function (data) {
-				var groups = [],
-					rawEvents = Object.keys(data).map(function (key) {
+				this.events = Object.keys(data).map(function (key) {
 						var event = data[key];
 						event.$key = key;
 
 						return event;
 					});
-
-				var rawGroups = _.groupBy(rawEvents, function (item) {
-					return item.startTime.slice(0, 10);
-				});
-
-				_.forEach(rawGroups, function (rawGroup) {
-					var group = {
-						date: rawGroup[0].date,
-						events: rawGroup
-					};
-
-					groups.push(group);
-				});
-
-				this.groupsEvents = groups;
 			}
 		});
 	</script>

@@ -2,6 +2,8 @@
 Page ...
 -->
 <link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../../bower_components/iron-icons/device-icons.html">
 
 <dom-module id="tpc-elem-event-item">
 
@@ -12,15 +14,63 @@ Page ...
 				color: black;
 			}
 
-			.event-item-content {
-				margin: 0 10px;
+			header {
+				margin: 14px 0 6px 0;
+				display: flex;
+			}
+
+			.event-item-body {
+				margin: 6px 10px 14px 10px;
+			}
+
+			.right-area {
+				flex: 1;
+			}
+
+			.left-area {
+				flex: 4;
+				margin-right: 10px;
+			}
+
+			h2, h3, h4, p {
+				margin: 0px;
+			}
+
+			h2, h4 {
+				text-align: center;
+			}
+
+			.hours {
+				color: #757575;
+			}
+
+			.hours iron-icon {
+				width: 18px;
+				height: 18px;
+			}
+
+			.hours span {
+				font-size: 14px;
 			}
 		</style>
 
 		<a href="/event/{{event.$key}}">
-			<div class="event-item-content">
-				<p>{{event.organizerName}}</p>
-				<h3>{{event.title}}</h3>
+			<header>
+				<div class="right-area">
+					<h2>{{getDay(event.startTime)}}</h2>
+					<h4>{{getMonth(event.startTime)}}</h4>
+				</div>
+				<div class="left-area">
+					<h3>{{event.title}}</h3>
+					<p>{{event.organizerName}}</p>
+					<p class="hours">
+						<iron-icon icon="device:access-time" item-icon></iron-icon>
+						<span>{{getHours(event.startTime)}}<span>
+					</p>
+				</div>
+			</header>
+			<div class="event-item-body">
+
 			</div>
 		</a>
 
@@ -39,6 +89,18 @@ Page ...
 					type: Object,
 					notify: false
 				}
+			},
+
+			getDay: function (date) {
+				return date ? moment(date).format('DD') : null;
+			},
+
+			getMonth: function (date) {
+				return date ? moment(date).format('MMM') : null;
+			},
+
+			getHours: function (date) {
+				return date ? moment(date).format('HH:mm') : null;
 			}
 		});
 	</script>
