@@ -1,7 +1,7 @@
 path /events {
 	read() { true }
 	write() { false }
-	index() { ["sortKey", "organizer"] }
+	index() { ["sortKey", "organizerId"] }
 }
 
 path /events/{eventId} is Event {
