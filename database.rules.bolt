@@ -1,7 +1,7 @@
 path /events {
 	read() { true }
 	write() { false }
-	index() { ["sortKey", "organizerId"] }
+	index() { ["startTime", "organizerId"] }
 }
 
 path /events/{eventId} is Event {
@@ -31,7 +31,6 @@ type Event {
 	title: String64,
 	startTime: StringDate,
 	endTime: StringDate,
-	sortKey: Number,
 	location: Location,
 	link: String256 | Null,
 	description: String4096,
