@@ -126,12 +126,16 @@ Page ...
 			},
 
 			_rawEventsChanged: function (data) {
-				this.events = Object.keys(data).map(function (key) {
+				var events = Object.keys(data).map(function (key) {
 						var event = data[key];
 						event.$key = key;
 
 						return event;
 					});
+
+				this.events = _.sortBy(events, function (event) {
+					return event.sortKey;
+				});
 			}
 		});
 	</script>
