@@ -8,7 +8,12 @@ Page ...
 <link rel="import" href="../../bower_components/app-layout/app-toolbar/app-toolbar.html">
 <link rel="import" href="../../bower_components/paper-progress/paper-progress.html">
 <link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../../bower_components/iron-icons/editor-icons.html">
+<link rel="import" href="../../bower_components/iron-icons/social-icons.html">
+<link rel="import" href="../../bower_components/paper-item/paper-icon-item.html">
 <link rel="import" href="../lib/marked-import.html">
+<link rel="import" href="../lib/moment-import.html">
 
 <dom-module id="tpc-page-event">
 
@@ -22,8 +27,23 @@ Page ...
 				width: 100%;
 			}
 
-			.event {
+			header {
+				padding: 10px;
+				background-color: #d2d2d2;
+			}
+
+			article {
 				margin: 0 10px;
+			}
+
+			header h1 {
+				margin: 0;
+				text-align: center;
+			}
+
+			.location-link {
+				color: black;
+				text-decoration: none;
 			}
 		</style>
 
@@ -38,14 +58,30 @@ Page ...
 				</app-toolbar>
 
 			</app-header>
-			<div class="event">
+			<header>
 				<h1>{{event.title}}</h1>
-				<p>{{event.organizerName}}</p>
-				<p>{{event.startTime}}</p>
-				<p>{{event.location.name}}, {{event.location.street}} {{event.location.zip}} {{event.location.city}}</p>
+				<paper-icon-item>
+					<iron-icon icon="social:people" item-icon></iron-icon>
+					{{event.organizerName}}
+				</paper-icon-item>
+				<paper-icon-item>
+					<iron-icon icon="editor:insert-invitation" item-icon></iron-icon>
+					{{prettifyDate(event.startTime)}}
+				</paper-icon-item>
+				<a href$="https://www.google.fr/maps?q={{getLocationQuery(event.location)}}"
+					target="_blank"
+					class="location-link">
+					<paper-icon-item>
+						<iron-icon icon="icons:room" item-icon></iron-icon>
+						{{event.location.name}}
+					</paper-icon-item>
+				</a>
+			</header>
 
+			<article>
+				<h3>Description</h3>
 				<div id="markdown-content"></div>
-			</div>
+			</article>
 		</app-header-layout>
 
 	</template>
@@ -105,6 +141,24 @@ Page ...
 				if (elem.length) {
 					elem[0].parentNode.removeChild(elem[0]);
 				}
+			},
+
+			prettifyDate: function (date) {
+				return moment(date).format('dddd DD MMMM - HH:mm');
+			},
+
+			getLocationQuery: function (location) {
+				return location ? [
+					location.name,
+					', ',
+					location.street,
+					', ',
+					location.zip,
+					' ',
+					location.city,
+					', ',
+					location.country
+				].join('') : null;
 			},
 
 			_eventIdChanged: function () {
