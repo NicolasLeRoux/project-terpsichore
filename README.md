@@ -95,3 +95,13 @@ sont ensuites à reviewer afin de les ajouter dans la base. Review par un admin
 dans un premier temps, puis par les users dans un second temps.
 
 Par la suite, les crowlers pouront faire des ajouts a reviewer.
+
+
+## Landing page
+
+Questionnement sur la page d'accueil du site. Idée, avoir une page qui regroupe
+des events plus important que ce qui ce trouve sur la liste des events. Permettre
+l'affichage de moins de data afin de limiter les recherche avec algolia. Par la suite,
+la mise en avant de ces derniers peut être facturé aux organisateurs...
+
+Le test actuelle est trop important en volume. Un seul event est visible...

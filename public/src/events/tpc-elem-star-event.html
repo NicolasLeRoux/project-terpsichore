@@ -1,0 +1,70 @@
+<!--
+Page ...
+-->
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../../bower_components/paper-styles/paper-styles.html">
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../../bower_components/iron-icons/communication-icons.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+
+<dom-module id="tpc-elem-star-event">
+
+	<template>
+		<style>
+			.rate-image {
+				position: absolute;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				width: 100px;
+				background: url('img/tmp.png');
+				background-size: cover;
+			}
+
+			.rate-header {
+				@apply --paper-font-headline;
+			}
+
+			.rate-name {
+				color: var(--paper-grey-600);
+				margin: 10px 0;
+			}
+
+			paper-icon-button.rate-icon {
+				--iron-icon-fill-color: white;
+				--iron-icon-stroke-color: var(--paper-grey-600);
+			}
+		</style>
+
+		<paper-card class="rate">
+			<div class="card-content">
+				<div class="rate-header">Rate this album</div>
+				<div class="rate-name">Mac Miller</div>
+				<div>Live from space</div>
+			</div>
+			<div class="card-actions">
+				<paper-icon-button class="rate-icon" icon="star"></paper-icon-button>
+				<paper-icon-button class="rate-icon" icon="star"></paper-icon-button>
+				<paper-icon-button class="rate-icon" icon="star"></paper-icon-button>
+				<paper-icon-button class="rate-icon" icon="star"></paper-icon-button>
+				<paper-icon-button class="rate-icon" icon="star"></paper-icon-button>
+			</div>
+			<div class="rate-image"></div>
+		</paper-card>
+	</template>
+
+	<script>
+		Polymer({
+			is: 'tpc-elem-star-event',
+
+			properties: {
+				firebaseApp: {
+					type: Object,
+					notify: false
+				}
+			}
+		});
+	</script>
+</dom-module>

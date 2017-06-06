@@ -8,6 +8,7 @@ Page principale de l'application hygie.
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../bower_components/app-layout/app-drawer/app-drawer.html">
 <link rel="import" href="./home/tpc-page-home.html">
+<link rel="import" href="./events/tpc-page-events.html">
 <link rel="import" href="./event/tpc-page-event.html">
 <link rel="import" href="./menu/tpc-elem-menu.html">
 <link rel="import" href="./add-event/tpc-page-add-event.html">
@@ -46,6 +47,10 @@ Page principale de l'application hygie.
 				name="home"
 				firebase-app="{{firebaseApp}}">
 			</tpc-page-home>
+			<tpc-page-events
+				name="events"
+				firebase-app="{{firebaseApp}}">
+			</tpc-page-events>
 			<tpc-page-event
 				name="event"
 				firebase-app="{{firebaseApp}}"

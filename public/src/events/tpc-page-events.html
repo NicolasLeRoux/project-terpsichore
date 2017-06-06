@@ -1,0 +1,69 @@
+<!--
+Page ...
+-->
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/app-layout/app-header-layout/app-header-layout.html">
+<link rel="import" href="../../bower_components/app-layout/app-scroll-effects/effects/waterfall.html">
+<link rel="import" href="../../bower_components/app-layout/app-header/app-header.html">
+<link rel="import" href="../../bower_components/app-layout/app-toolbar/app-toolbar.html">
+<link rel="import" href="../../bower_components/paper-progress/paper-progress.html">
+<link rel="import" href="./tpc-elem-star-event.html">
+
+<dom-module id="tpc-page-events">
+
+	<template>
+		<style>
+			app-toolbar {
+				background-color: #f7f7f7;
+			}
+
+			paper-progress {
+				width: 100%;
+			}
+
+			header {
+				margin: 0 10px;
+			}
+
+			.event-list {
+				margin: 10px;
+			}
+		</style>
+
+		<app-header-layout>
+			<app-header reveals condenses effects="waterfall">
+				<app-toolbar>
+					<a href="/home">
+						<paper-icon-button icon="icons:arrow-back"></paper-icon-button>
+					</a>
+					<div main-title>Retour accueil</div>
+					<!--<paper-progress indeterminate bottom-item></paper-progress>-->
+				</app-toolbar>
+
+			</app-header>
+
+			<header>
+				<h3>France</h3>
+			</header>
+
+			<div class="event-list">
+				<tpc-elem-star-event>
+				</tpc-elem-star-event>
+			</div>
+		</app-header-layout>
+
+	</template>
+
+	<script>
+		Polymer({
+			is: 'tpc-page-events',
+
+			properties: {
+				firebaseApp: {
+					type: Object,
+					notify: false
+				}
+			}
+		});
+	</script>
+</dom-module>
