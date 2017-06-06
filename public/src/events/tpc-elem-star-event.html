@@ -13,13 +13,22 @@ Page ...
 
 	<template>
 		<style>
+			paper-card {
+				width: 100%;
+				min-height: 200px;
+			}
+
+			.card-content {
+				width: calc(100% - 136px);
+			}
+
 			.rate-image {
 				position: absolute;
 				top: 0;
 				right: 0;
 				bottom: 0;
 				width: 100px;
-				background: url('/img/tmp.png');
+				background: url('/img/wotp.png');
 				background-size: cover;
 			}
 
@@ -36,20 +45,28 @@ Page ...
 				--iron-icon-fill-color: white;
 				--iron-icon-stroke-color: var(--paper-grey-600);
 			}
+
+			.card-actions {
+				position: absolute;
+				bottom: 0px;
+				display: flex;
+				padding: 10px 0;
+				width: calc(100% - 100px);
+			}
 		</style>
 
 		<paper-card class="rate">
 			<div class="card-content">
-				<div class="rate-header">Rate this album</div>
-				<div class="rate-name">Mac Miller</div>
-				<div>Live from space</div>
+				<div class="rate-header">7ième Westie On The Promenade</div>
+				<div class="rate-name">Du 08 juillet au 14 juillet</div>
 			</div>
 			<div class="card-actions">
-				<paper-icon-button class="rate-icon" icon="star"></paper-icon-button>
-				<paper-icon-button class="rate-icon" icon="star"></paper-icon-button>
-				<paper-icon-button class="rate-icon" icon="star"></paper-icon-button>
-				<paper-icon-button class="rate-icon" icon="star"></paper-icon-button>
-				<paper-icon-button class="rate-icon" icon="star"></paper-icon-button>
+				<div>
+					<paper-icon-button icon="communication:location-on"></paper-icon-button>
+				</div>
+				<span>
+					Mandelieu-la-Napoule, France
+				</span>
 			</div>
 			<div class="rate-image"></div>
 		</paper-card>
