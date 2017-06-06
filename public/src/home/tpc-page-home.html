@@ -93,15 +93,18 @@ Page ...
 			queryDatabase: function () {
 				var xhr = new XMLHttpRequest(),
 					url = app.databaseURL + '/events.json',
+					today = moment(),
 					params = {
 						orderBy: '\"sortKey\"',
-						startAt: '201705071930',
+						startAt: today.format('YYYYMMDDHHmm'),
+						endAt: today.add(2, 'months').format('YYYYMMDDHHmm'),
 						limitToFirst: 10
 					};
 
 				// En attente de mieux
 				url += '?orderBy=' + params.orderBy;
 				url += '&startAt=' + params.startAt;
+				//url += '&endAt=' + params.endAt;
 				url += '&limitToFirst=' + params.limitToFirst;
 
 				xhr.onreadystatechange = this.onProcessRequest.bind(this, xhr);
@@ -133,6 +136,12 @@ Page ...
 						return event;
 					});
 
+				/**
+				 * __WARNING__:
+				 * The REST API Returns Unsorted Results, JSON interpreters do not
+				 * enforce any ordering on the result set. Therefore, it may be
+				 * necessary to manually sort the results if ordering is important.
+				 */
 				this.events = _.sortBy(events, function (event) {
 					return event.sortKey;
 				});
