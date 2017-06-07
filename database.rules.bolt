@@ -1,7 +1,12 @@
 path /events {
 	read() { true }
 	write() { false }
-	index() { ["sortKey", "organizerId", "isPromoted"] }
+	index() { [
+		"sortKey",
+		"organizerId",
+		"facebookId",
+		"isPromoted"
+	] }
 }
 
 path /events/{eventId} is Event {
@@ -42,9 +47,9 @@ type Event {
 type Organizer {
 	name: String32,
 	city: String32,
-	facebookId: String32 | Null,
-	website: String64 | Null,
-	facebook: String64 | Null
+	facebookId: String64 | Null,
+	website: String128 | Null,
+	facebook: String128 | Null
 }
 
 type Location {
@@ -63,6 +68,10 @@ type String32 extends String {
 
 type String64 extends String {
 	validate() { this.length > 0 && this.length <= 64 }
+}
+
+type String128 extends String {
+	validate() { this.length > 0 && this.length <= 128 }
 }
 
 type String256 extends String {
