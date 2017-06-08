@@ -20,12 +20,26 @@ Page ...
 
 	<template>
 		<style>
-			app-toolbar {
-				background-color: #f7f7f7;
+			app-header {
+				height: 200px;
+				background-image: url("/img/freedom.svg");
+				background-position: left center;
+				background-size: cover;
 			}
 
 			paper-progress {
 				width: 100%;
+			}
+
+			.tall {
+				height: 136px;
+			}
+
+			.tall h1 {
+				font-size: 2rem;
+				width: 100%;
+				text-align: center;
+				color: #f7f7f7;
 			}
 
 			header {
@@ -52,7 +66,7 @@ Page ...
 		</tpc-structured-data-event>
 
 		<app-header-layout>
-			<app-header reveals condenses effects="waterfall">
+			<app-header fixed>
 				<app-toolbar>
 					<a href="/home">
 						<paper-icon-button icon="icons:arrow-back"></paper-icon-button>
@@ -60,10 +74,11 @@ Page ...
 					<div main-title>Retour accueil</div>
 					<!--<paper-progress indeterminate bottom-item></paper-progress>-->
 				</app-toolbar>
-
+				<app-toolbar class="tall">
+					<h1>{{event.title}}</h1>
+				</app-toolbar>
 			</app-header>
 			<header>
-				<h1>{{event.title}}</h1>
 				<paper-icon-item>
 					<iron-icon icon="social:people" item-icon></iron-icon>
 					{{event.organizerName}}
