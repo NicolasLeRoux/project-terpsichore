@@ -12,6 +12,7 @@ Page ...
 <link rel="import" href="../../bower_components/iron-icons/editor-icons.html">
 <link rel="import" href="../../bower_components/iron-icons/social-icons.html">
 <link rel="import" href="../../bower_components/paper-item/paper-icon-item.html">
+<link rel="import" href="./tpc-structured-data-event.html">
 <link rel="import" href="../lib/marked-import.html">
 <link rel="import" href="../lib/moment-import.html">
 
@@ -46,6 +47,9 @@ Page ...
 				text-decoration: none;
 			}
 		</style>
+
+		<tpc-structured-data-event event="{{event}}">
+		</tpc-structured-data-event>
 
 		<app-header-layout>
 			<app-header reveals condenses effects="waterfall">

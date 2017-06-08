@@ -1,0 +1,48 @@
+<!--
+Page ...
+-->
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<dom-module id="tpc-structured-data-event">
+
+	<template>
+		<script type="application/ld+json">
+		{
+			"@context": "http://schema.org",
+			"@type": "Event",
+			"name": "{{event.title}}",
+			"startDate": "{{event.startTime}}",
+			"endDate": "{{event.endTime}}",
+			"location": {
+				"@type": "Place",
+				"name": "{{event.location.name}}",
+				"address": {
+					"@type": "PostalAddress",
+					"streetAddress": "{{event.location.street}}",
+					"addressLocality": "{{event.location.city}}",
+					"postalCode": "{{event.location.zip}}",
+					"addressCountry": "{{event.location.country}}"
+				}
+			},
+			"description": "{{event.description}}"
+		}
+		</script>
+	</template>
+
+	<script>
+		Polymer({
+			is: 'tpc-structured-data-event',
+
+			properties: {
+				firebaseApp: {
+					type: Object,
+					notify: false
+				},
+				event: {
+					type: Object,
+					notify: true
+				}
+			}
+		});
+	</script>
+</dom-module>
