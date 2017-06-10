@@ -96,17 +96,37 @@
 			};
 		</script>
 		<script>
-			var linkNode = document.createElement('link');
-			linkNode.setAttribute('rel', 'import');
-			linkNode.setAttribute('async', 'true');
+			window.startApp = function () {
+				var linkNode = document.createElement('link');
+				linkNode.setAttribute('rel', 'import');
+				linkNode.setAttribute('async', 'true');
 
-			if (document.location.hostname === 'localhost') {
-				linkNode.setAttribute('href', '/src/tpc-app.html');
-			} else {
-				linkNode.setAttribute('href', '/tpc-app.vulcanised.html');
-			}
+				if (document.location.hostname === 'localhost') {
+					linkNode.setAttribute('href', '/src/tpc-app.html');
+				} else {
+					linkNode.setAttribute('href', '/tpc-app.vulcanised.html');
+				}
 
-			document.head.appendChild(linkNode);
+				document.head.appendChild(linkNode);
+			};
+		</script>
+		<script>
+			(function() {
+				if ('registerElement' in document
+					&& 'import' in document.createElement('link')
+					&& 'content' in document.createElement('template')) {
+						startApp();
+				} else {
+					// polyfill the platform!
+					var elm = document.createElement('script');
+					elm.src = 'https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/0.7.24/webcomponents-lite.min.js';
+					document.body.appendChild(elm);
+
+					window.addEventListener('WebComponentsReady', function() {
+						startApp();
+					});
+				}
+			})();
 		</script>
 	</body>
 </html>
