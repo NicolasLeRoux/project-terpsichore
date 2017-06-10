@@ -136,6 +136,8 @@ Page ...
 						return event;
 					});
 
+				this.removeAppShell();
+
 				/**
 				 * __WARNING__:
 				 * The REST API Returns Unsorted Results, JSON interpreters do not
@@ -145,7 +147,15 @@ Page ...
 				this.events = _.sortBy(events, function (event) {
 					return event.sortKey;
 				});
-			}
+			},
+
+			removeAppShell: function () {
+				var appShellElm = document.getElementById('app-shell');
+
+				if (appShellElm) {
+					appShellElm.remove();
+				}
+			},
 		});
 	</script>
 </dom-module>
