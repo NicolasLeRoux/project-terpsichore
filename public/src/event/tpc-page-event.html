@@ -9,7 +9,7 @@ Page ...
 <link rel="import" href="../../bower_components/paper-progress/paper-progress.html">
 <link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
-<link rel="import" href="../../bower_components/iron-icons/editor-icons.html">
+<link rel="import" href="../../bower_components/iron-icons/device-icons.html">
 <link rel="import" href="../../bower_components/iron-icons/social-icons.html">
 <link rel="import" href="../../bower_components/paper-item/paper-icon-item.html">
 <link rel="import" href="./tpc-structured-data-event.html">
@@ -22,13 +22,19 @@ Page ...
 		<style>
 			app-header {
 				height: 200px;
-				background-image: url("/img/freedom.svg");
+				background-image: url("/img/audience.jpg");
+				background-color: gray;
 				background-position: left center;
 				background-size: cover;
 			}
 
 			paper-progress {
 				width: 100%;
+			}
+
+			app-header,
+			paper-icon-button {
+				color: whitesmoke;
 			}
 
 			.tall {
@@ -39,26 +45,37 @@ Page ...
 				font-size: 2rem;
 				width: 100%;
 				text-align: center;
-				color: #f7f7f7;
-			}
-
-			header {
-				padding: 10px;
-				background-color: #d2d2d2;
-			}
-
-			article {
-				margin: 0 10px;
-			}
-
-			header h1 {
-				margin: 0;
-				text-align: center;
 			}
 
 			.location-link {
 				color: black;
 				text-decoration: none;
+			}
+
+			.block {
+				display: flex;
+				min-height: 20px;
+				margin: 10px 0;
+			}
+
+			iron-icon {
+				flex: 1;
+				min-width: 64px;
+				margin-top: 6px;
+			}
+
+			.block-right {
+				flex: 5;
+				margin-right: 10px;
+			}
+
+			.block-right h1,
+			.block-right h2,
+			.block-right h3,
+			.block-right h4,
+			.block-right h5,
+			.block-right p {
+				margin-top: 0px;
 			}
 		</style>
 
@@ -78,29 +95,34 @@ Page ...
 					<h1>{{event.title}}</h1>
 				</app-toolbar>
 			</app-header>
-			<header>
-				<paper-icon-item>
-					<iron-icon icon="social:people" item-icon></iron-icon>
-					{{event.organizerName}}
-				</paper-icon-item>
-				<paper-icon-item>
-					<iron-icon icon="editor:insert-invitation" item-icon></iron-icon>
-					{{prettifyDate(event.startTime)}}
-				</paper-icon-item>
-				<a href$="https://www.google.fr/maps?q={{getLocationQuery(event.location)}}"
-					target="_blank"
-					class="location-link">
-					<paper-icon-item>
-						<iron-icon icon="icons:room" item-icon></iron-icon>
-						{{event.location.name}}
-					</paper-icon-item>
-				</a>
-			</header>
 
-			<article>
-				<h3>Description</h3>
-				<div id="markdown-content"></div>
-			</article>
+			<div class="block">
+				<iron-icon icon="social:people" item-icon></iron-icon>
+				<div class="block-right">
+					<p>{{event.organizerName}}</p>
+				</div>
+			</div>
+
+			<div class="block">
+				<iron-icon icon="device:access-time" item-icon></iron-icon>
+				<div class="block-right">
+					<p>{{prettifyDate(event.startTime)}}</p>
+				</div>
+			</div>
+
+			<div class="block">
+				<iron-icon icon="icons:room" item-icon></iron-icon>
+				<div class="block-right">
+					<p>{{event.location.name}}</p>
+					<p>{{event.location.street}}</p>
+				</div>
+			</div>
+
+			<div class="block">
+				<iron-icon icon="icons:description" item-icon></iron-icon>
+				<div id="markdown-content" class="block-right">
+				</div>
+			</div>
 		</app-header-layout>
 
 	</template>
