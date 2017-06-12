@@ -48,6 +48,10 @@ Page ...
 			paper-slider {
 				flex: 6;
 			}
+
+			paper-toggle-button {
+				margin-bottom: 10px;
+			}
 		</style>
 
 		<app-header-layout>
@@ -64,7 +68,7 @@ Page ...
 				<h3>Informations</h3>
 
 				<p>Pour le moment, les paramètres de personnalisation de la recherche sont en cours de développement.</p>
-				<p><b>Stay tuned !<b></p>
+				<p><b>Stay tuned !</b></p>
 
 				<br>
 
@@ -102,9 +106,17 @@ Page ...
 				<br>
 
 				<h3>Danse</h3>
-				
-				<paper-toggle-button disabled noink>Lindy hop</paper-toggle-button>
-				<paper-toggle-button disabled noink>West coast swing</paper-toggle-button>
+
+				<paper-toggle-button disabled
+					noink
+					checked="true">
+					Lindy hop
+				</paper-toggle-button>
+				<paper-toggle-button disabled
+					noink
+					checked="true">
+					West coast swing
+				</paper-toggle-button>
 			</div>
 		</app-header-layout>
 	</template>
