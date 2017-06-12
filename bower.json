@@ -29,7 +29,8 @@
     "paper-toggle-button": "^2.0.0",
     "paper-slider": "^2.0.0",
     "google-map": "^1.2.0",
-    "paper-listbox": "^2.0.0"
+    "paper-listbox": "^2.0.0",
+    "paper-dropdown-menu": "^2.0.0"
   },
   "devDependencies": {}
 }

@@ -2,49 +2,111 @@
 Page ...
 -->
 <link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/app-layout/app-header-layout/app-header-layout.html">
+<link rel="import" href="../../bower_components/app-layout/app-scroll-effects/effects/waterfall.html">
+<link rel="import" href="../../bower_components/app-layout/app-header/app-header.html">
+<link rel="import" href="../../bower_components/app-layout/app-toolbar/app-toolbar.html">
 <link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
 <link rel="import" href="../../bower_components/iron-icons/device-icons.html">
 <link rel="import" href="../../bower_components/paper-toggle-button/paper-toggle-button.html">
 <link rel="import" href="../../bower_components/paper-slider/paper-slider.html">
+<link rel="import" href="../../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="../../bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="../../bower_components/paper-item/paper-item.html">
 
 <dom-module id="tpc-page-parameter">
 
 	<template>
 		<style>
+			app-toolbar {
+				background-color: #f7f7f7;
+			}
 
+			app-toolbar,
+			paper-icon-button {
+				color: #5a5a5a;
+			}
+
+			.content {
+				margin: 10px;
+			}
+
+			paper-dropdown-menu {
+				width: 100%;
+				margin-bottom: 32px;
+			}
+
+			.rayon {
+				display: flex;
+			}
+
+			.rayon > span {
+				margin-top: 8px;
+				flex: 1;
+			}
+
+			paper-slider {
+				flex: 6;
+			}
 		</style>
 
-		<div>
-			<iron-icon icon="icons:arrow-back"></iron-icon>
-			<a href="/home">Retour accueil</a>
-		</div>
+		<app-header-layout>
+			<app-header fixed>
+				<app-toolbar>
+					<a href="/home">
+						<paper-icon-button icon="icons:close"></paper-icon-button>
+					</a>
+					<div main-title>Paramètres</div>
+					<!--<paper-progress indeterminate bottom-item></paper-progress>-->
+				</app-toolbar>
+			</app-header>
+			<div class="content">
+				<h3>Informations</h3>
 
-		<h2>Paramètres</h2>
+				<p>Pour le moment, les paramètres de personnalisation de la recherche sont en cours de développement.</p>
+				<p><b>Stay tuned !<b></p>
 
-		<h3>Localisation</h3>
+				<br>
 
-		<!--<iron-icon icon="device:gps-fixed"></iron-icon>-->
-		<paper-toggle-button
-			id="geolocation-toggle"
-			noink
-			checked="{{isGeolocationAllowed}}">
-			Utiliser ma position
-		</paper-toggle-button>
+				<h3>Localisation</h3>
 
-		<paper-slider
-			class="red"
-			value="{{rayon}}"
-			min="1"
-			max="50"
-			pin></paper-slider>
-		<p>{{rayon}} km</p>
+				<paper-dropdown-menu label="Villes">
+					<paper-listbox slot="dropdown-content" selected="0">
+						<paper-item>Paris</paper-item>
+						<paper-item disabled>Lyon</paper-item>
+						<paper-item disabled>Marseille</paper-item>
+					</paper-listbox>
+				</paper-dropdown-menu>
 
-		<h3>Danse</h3>
-		<paper-toggle-button noink>Lindy hop</paper-toggle-button>
-		<paper-toggle-button noink>Rock</paper-toggle-button>
-		<paper-toggle-button noink>Salsa</paper-toggle-button>
-		<paper-toggle-button noink>West coast swing</paper-toggle-button>
+				<!--<iron-icon icon="device:gps-fixed"></iron-icon>
+				<paper-toggle-button
+					id="geolocation-toggle"
+					noink
+					checked="{{isGeolocationAllowed}}">
+					Utiliser ma position
+				</paper-toggle-button>
+				-->
 
+				<div class="rayon">
+					<span>1 km</span>
+					<paper-slider
+						class="red"
+						value="{{rayon}}"
+						min="1"
+						max="50"
+						pin
+						disabled></paper-slider>
+					<span>50 km</span>
+				</div>
+
+				<br>
+
+				<h3>Danse</h3>
+				
+				<paper-toggle-button disabled noink>Lindy hop</paper-toggle-button>
+				<paper-toggle-button disabled noink>West coast swing</paper-toggle-button>
+			</div>
+		</app-header-layout>
 	</template>
 
 	<script>
@@ -58,7 +120,7 @@ Page ...
 				},
 				rayon: {
 					type: Number,
-					value: 8,
+					value: 30,
 					notify: true
 				},
 				isGeolocationAllowed: {
