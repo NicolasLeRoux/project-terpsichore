@@ -92,9 +92,11 @@ Page ...
 						</span>
 					</p>
 					<p class="event-type">
-						<span>#WCS</span>
-						<span>#LindyHop</span>
-						<span>#Rock</span>
+						<template is="dom-repeat"
+							items="{{extractDances(event.danceType)}}"
+							as="dance">
+							<span>#{{dance}}</span>
+						</template>
 					</p>
 				</div>
 			</header>
@@ -130,6 +132,10 @@ Page ...
 
 			getHours: function (date) {
 				return date ? moment(date).format('HH:mm') : null;
+			},
+
+			extractDances: function (danceType) {
+				return danceType.split(',');
 			}
 		});
 	</script>

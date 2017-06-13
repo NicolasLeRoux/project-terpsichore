@@ -41,7 +41,8 @@ type Event {
 	link: String256 | Null,
 	description: String4096,
 	facebookId: String32 | Null,
-	isPromoted: Boolean;
+	isPromoted: Boolean,
+	danceType: String64
 }
 
 type Organizer {
@@ -49,7 +50,8 @@ type Organizer {
 	city: String32,
 	facebookId: String64 | Null,
 	website: String128 | Null,
-	facebook: String128 | Null
+	facebook: String128 | Null,
+	danceType: String64
 }
 
 type Location {
