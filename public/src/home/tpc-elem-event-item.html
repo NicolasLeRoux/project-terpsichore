@@ -40,17 +40,33 @@ Page ...
 				text-align: center;
 			}
 
-			.hours {
+			.event-details {
+				display: flex;
 				color: #757575;
+				margin-top: 4px;
 			}
 
-			.hours iron-icon {
+			.event-details > span {
+				flex: 1;
+			}
+
+			.event-type {
+				color: lightcoral;
+				margin-top: 4px;
+			}
+
+			.event-details iron-icon {
 				width: 18px;
 				height: 18px;
 			}
 
-			.hours span {
+			.event-details span,
+			.event-type span {
 				font-size: 14px;
+			}
+
+			.event-type span {
+				margin-right: 10px;
 			}
 		</style>
 
@@ -62,10 +78,21 @@ Page ...
 				</div>
 				<div class="left-area">
 					<h3>{{event.title}}</h3>
-					<p>{{event.organizerName}}</p>
-					<p class="hours">
-						<iron-icon icon="device:access-time" item-icon></iron-icon>
-						<span>{{getHours(event.startTime)}}<span>
+					<p><i>Temple du swing {{event.organizerName}}<i></p>
+					<p class="event-details">
+						<span>
+							<iron-icon icon="device:access-time" item-icon></iron-icon>
+							<span>{{getHours(event.startTime)}}</span>
+						</span>
+						<span>
+							<iron-icon icon="icons:room" item-icon></iron-icon>
+							<span>à 2,5 km</span>
+						</span>
+					</p>
+					<p class="event-type">
+						<span>#WCS</span>
+						<span>#LindyUp</span>
+						<span>#Rock</span>
 					</p>
 				</div>
 			</header>
