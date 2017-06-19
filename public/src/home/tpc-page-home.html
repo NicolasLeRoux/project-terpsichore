@@ -10,6 +10,8 @@ Page ...
 <link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
 <link rel="import" href="../../bower_components/iron-icons/editor-icons.html">
 <link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../bower_components/paper-spinner/paper-spinner-lite.html">
+<link rel="import" href="../../bower_components/paper-styles/paper-styles.html">
 <link rel="import" href="../lib/lodash-import.html">
 <link rel="import" href="../lib/algoliasearch-import.html">
 <link rel="import" href="./tpc-elem-event-list.html">
@@ -28,6 +30,10 @@ Page ...
 
 			paper-progress {
 				width: 100%;
+			}
+
+			paper-spinner-lite {
+				margin: 30px 0 30px calc(50% - 28px);
 			}
 		</style>
 
@@ -51,6 +57,7 @@ Page ...
 					events="{{events}}">
 				</tpc-elem-event-list>
 			</div>
+			<paper-spinner-lite active class="thin"></paper-spinner-lite>
 		</app-header-layout>
 
 	</template>
@@ -88,6 +95,12 @@ Page ...
 				}).then(res => {
 					console.log(res);
 				});*/
+
+				document.body.onscroll = this.onScrollEvent.bind(this);
+			},
+
+			onScrollEvent: function (event) {
+				//console.log(a);
 			},
 
 			queryDatabase: function () {
