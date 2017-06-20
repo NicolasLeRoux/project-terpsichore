@@ -33,7 +33,7 @@ Page ...
 			}
 
 			paper-spinner-lite {
-				margin: 30px 0 30px calc(50% - 28px);
+				margin: 30px 0 30px calc(50% - 14px);
 			}
 		</style>
 
@@ -57,7 +57,7 @@ Page ...
 					events="{{events}}">
 				</tpc-elem-event-list>
 			</div>
-			<paper-spinner-lite active class="thin"></paper-spinner-lite>
+			<paper-spinner-lite id="bottom-spinner" active class="thin"></paper-spinner-lite>
 		</app-header-layout>
 
 	</template>
@@ -78,7 +78,14 @@ Page ...
 				},
 				events: {
 					type: Array,
-					notify: true
+					notify: true,
+					value: []
+				},
+				isCloseToBottomScroll: {
+					type: Boolean,
+					notify: true,
+					observer: '_onCloseToBottomScroll',
+					value: false
 				}
 			},
 
@@ -99,18 +106,29 @@ Page ...
 				document.body.onscroll = this.onScrollEvent.bind(this);
 			},
 
-			onScrollEvent: function (event) {
-				//console.log(a);
+			onScrollEvent: function () {
+				var wHeight = window.innerHeight,
+					spinnerElm = this.$['bottom-spinner'],
+					spinnerBound = spinnerElm ? spinnerElm.getBoundingClientRect() : null;
+
+				if (spinnerBound) {
+					var stillHiddenPourcent = Math.floor((spinnerBound.top - wHeight) * 100 / spinnerBound.top);
+
+					if (stillHiddenPourcent <= 10) {
+						//spinnerElm.setAttribute('active', true);
+						this.isCloseToBottomScroll = true;
+					}
+				}
 			},
 
-			queryDatabase: function () {
+			queryDatabase: function (mStart) {
 				var xhr = new XMLHttpRequest(),
 					url = app.databaseURL + '/events.json',
-					today = moment(),
+					startMoment = mStart || moment(),
 					params = {
 						orderBy: '\"sortKey\"',
-						startAt: today.format('YYYYMMDDHHmm'),
-						endAt: today.add(2, 'months').format('YYYYMMDDHHmm'),
+						startAt: startMoment.format('YYYYMMDDHHmm'),
+						endAt: startMoment.add(2, 'months').format('YYYYMMDDHHmm'),
 						limitToFirst: 10
 					};
 
@@ -157,9 +175,27 @@ Page ...
 				 * enforce any ordering on the result set. Therefore, it may be
 				 * necessary to manually sort the results if ordering is important.
 				 */
-				this.events = _.sortBy(events, function (event) {
+				this.events = this.events.concat(_.sortBy(events, function (event) {
 					return event.sortKey;
-				});
+				}));
+
+				if (events.length < 10) {
+					this.$['bottom-spinner'].remove();
+				} else {
+					setTimeout(() => {
+						this.isCloseToBottomScroll = false;
+					}, 600);
+				}
+			},
+
+			_onCloseToBottomScroll: function () {
+				var lastEvent = this.events[this.events.length - 1];
+
+				if (lastEvent) {
+					var mStart = moment(lastEvent.startTime);
+
+					this.queryDatabase(mStart.add(1, 'minutes'));
+				}
 			},
 
 			removeAppShell: function () {
@@ -168,7 +204,7 @@ Page ...
 				if (appShellElm) {
 					appShellElm.remove();
 				}
-			},
+			}
 		});
 	</script>
 </dom-module>
