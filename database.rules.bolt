@@ -30,6 +30,17 @@ path /organizers/{organizerId} is Organizer {
 	write() { true }
 }
 
+path /dances {
+	read() { true }
+	write() { false }
+	index() { "city" }
+}
+
+path /dances/{danceId} is Dance {
+	read() { true }
+	write() { true }
+}
+
 type Event {
 	organizerId: String32 | Null,
 	organizerName: String32 | Null,
@@ -62,6 +73,12 @@ type Location {
 	longitude: Number,
 	street: String64 | Null,
 	zip: StringZip
+}
+
+type Dance {
+	name: String32,
+	tag: String32,
+	alias: String128 | Null
 }
 
 type String32 extends String {
