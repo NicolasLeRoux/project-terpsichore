@@ -1,9 +1,19 @@
 <!--
 Page ...
+
+TODO:
+A rajouter à la fin dans la liste:
+- Les Hash anec les types de danses
+- Lien vers de facebook de l'event (Il manque des données actuellement pour générer
+le lien, à savoir l'ID facebook de l'event)
+
+L'image n'est pas top et prend trop de place sur la lecture.
+
+Le style scopé ne permet pas de modifier le formatage du bloc de description...
 -->
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/app-layout/app-header-layout/app-header-layout.html">
-<link rel="import" href="../../bower_components/app-layout/app-scroll-effects/effects/waterfall.html">
+<link rel="import" href="../../bower_components/app-layout/app-scroll-effects/app-scroll-effects.html">
 <link rel="import" href="../../bower_components/app-layout/app-header/app-header.html">
 <link rel="import" href="../../bower_components/app-layout/app-toolbar/app-toolbar.html">
 <link rel="import" href="../../bower_components/paper-progress/paper-progress.html">
@@ -22,8 +32,7 @@ Page ...
 		<style>
 			app-header {
 				height: 200px;
-				background-image: url("/img/audience.jpg");
-				background-color: gray;
+				background-color: lightcoral;
 				background-position: left center;
 				background-size: cover;
 			}
@@ -67,6 +76,7 @@ Page ...
 			.block-right {
 				flex: 5;
 				margin-right: 10px;
+				margin-top: 8px;
 			}
 
 			.block-right h1,
@@ -77,22 +87,31 @@ Page ...
 			.block-right p {
 				margin-top: 0px;
 			}
+
+			.address-main {
+				margin-bottom: 6px;
+			}
+
+			.address-details {
+				color: gray;
+				font-size: 0.9rem;
+				margin-top: 0px;
+			}
 		</style>
 
 		<tpc-structured-data-event event="{{event}}">
 		</tpc-structured-data-event>
 
 		<app-header-layout>
-			<app-header fixed>
+			<app-header reveals condenses effects="waterfall">
 				<app-toolbar>
 					<a href="/home">
-						<paper-icon-button icon="icons:arrow-back"></paper-icon-button>
+						<paper-icon-button icon="icons:close"></paper-icon-button>
 					</a>
-					<div main-title>Retour accueil</div>
 					<!--<paper-progress indeterminate bottom-item></paper-progress>-->
 				</app-toolbar>
 				<app-toolbar class="tall">
-					<h1>{{event.title}}</h1>
+					<h1 main-title>{{event.title}}</h1>
 				</app-toolbar>
 			</app-header>
 
@@ -113,8 +132,12 @@ Page ...
 			<div class="block">
 				<iron-icon icon="icons:room" item-icon></iron-icon>
 				<div class="block-right">
-					<p>{{event.location.name}}</p>
-					<p>{{event.location.street}}</p>
+					<p class="address-main">{{event.location.name}}</p>
+					<p class="address-details">
+						<span>{{event.location.street}}</span>,
+						<span>{{event.location.zip}}</span>
+						<span>{{event.location.city}}</span>
+					</p>
 				</div>
 			</div>
 
