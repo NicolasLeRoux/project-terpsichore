@@ -88,7 +88,7 @@ Page ...
 						</span>
 						<span>
 							<iron-icon icon="icons:room" item-icon></iron-icon>
-							<span>à 2,5 km</span>
+							<span>{{getDistance(event)}}</span>
 						</span>
 					</p>
 					<p class="event-type">
@@ -132,6 +132,23 @@ Page ...
 
 			getHours: function (date) {
 				return date ? moment(date).format('HH:mm') : null;
+			},
+
+			getDistance: function (event) {
+				var dist = event._rankingInfo ? event._rankingInfo.geoDistance : 0,
+					response = [
+						'à'
+					];
+
+				if (dist > 1000) {
+					response.push(Math.floor(dist / 100) / 10);
+					response.push('km');
+				} else {
+					response.push(dist);
+					response.push('m');
+				}
+
+				return response.join(' ');
 			},
 
 			extractDances: function (danceType) {

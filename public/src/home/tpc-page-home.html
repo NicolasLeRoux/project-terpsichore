@@ -57,7 +57,7 @@ Page ...
 					events="{{events}}">
 				</tpc-elem-event-list>
 			</div>
-			<paper-spinner-lite id="bottom-spinner" active class="thin"></paper-spinner-lite>
+			<paper-spinner-lite id="bottom-spinner" class="thin"></paper-spinner-lite>
 		</app-header-layout>
 
 	</template>
@@ -81,6 +81,10 @@ Page ...
 					notify: true,
 					value: []
 				},
+				algoliaResp: {
+					type: Object,
+					notify: false
+				},
 				isCloseToBottomScroll: {
 					type: Boolean,
 					notify: true,
@@ -90,20 +94,10 @@ Page ...
 			},
 
 			ready: function() {
-				this.queryDatabase();
+				//this.queryDatabase();
+				this.queryAlgolia();
 
-				var client = algoliasearch('TI0IELER5O', '1ca911421d2528b9a9156ea785a15c6c');
-				var index = client.initIndex('events');
-
-				/*index.search({
-					filters: 'sortKey > 201705111909',
-					aroundLatLng: '48.855465, 2.345105',
-					aroundRadius: 20000
-				}).then(res => {
-					console.log(res);
-				});*/
-
-				document.body.onscroll = this.onScrollEvent.bind(this);
+				//document.body.onscroll = this.onScrollEvent.bind(this);
 			},
 
 			onScrollEvent: function () {
@@ -141,6 +135,26 @@ Page ...
 				xhr.onreadystatechange = this.onProcessRequest.bind(this, xhr);
 				xhr.open("GET", url, true);
 				xhr.send();
+			},
+
+			queryAlgolia: function (pageArg) {
+				var client = algoliasearch('TI0IELER5O', '1ca911421d2528b9a9156ea785a15c6c'),
+					index = client.initIndex('events'),
+					page = pageArg || 0;
+
+				index.search({
+					filters: 'sortKey > ' + moment().format('YYYYMMDDHHmm'),
+					aroundLatLng: '48.855465, 2.345105', // TODO Variabiliser
+					aroundRadius: 20000, // TODO Variabiliser
+					getRankingInfo: true,
+					page: page,
+					hitsPerPage: 10
+				}).then(res => {
+					this.algoliaResp = res;
+					this.events = res.hits;
+
+					this.removeAppShell();
+				});
 			},
 
 			onProcessRequest: function (xhr, event) {
