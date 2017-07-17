@@ -105,3 +105,12 @@ l'affichage de moins de data afin de limiter les recherche avec algolia. Par la 
 la mise en avant de ces derniers peut être facturé aux organisateurs...
 
 Le test actuelle est trop important en volume. Un seul event est visible...
+
+
+## Palette de couleur
+
+- ROSE MADDER: DF2935
+- CHERRY BLOSSOM PINK: F9B8C3
+- SUNSET ORANGE: FC5A60
+- DESIRE: EF3E4A
+- TEA ROSE: F7C5C5

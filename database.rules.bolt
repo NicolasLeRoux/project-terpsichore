@@ -11,12 +11,12 @@ path /events {
 
 path /events/{eventId} is Event {
 	read() { true }
-	write() { true }
+	write() { false }
 }
 
 path /unchecked-events/{eventId} is Event {
 	read() { true }
-	write() { true }
+	write() { false }
 }
 
 path /organizers {
@@ -27,7 +27,7 @@ path /organizers {
 
 path /organizers/{organizerId} is Organizer {
 	read() { true }
-	write() { true }
+	write() { false }
 }
 
 path /dances {
@@ -38,7 +38,7 @@ path /dances {
 
 path /dances/{danceId} is Dance {
 	read() { true }
-	write() { true }
+	write() { false }
 }
 
 type Event {
