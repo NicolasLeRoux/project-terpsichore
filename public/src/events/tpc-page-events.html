@@ -47,8 +47,13 @@ Page ...
 			</header>
 
 			<div class="event-list">
-				<tpc-elem-star-event>
-				</tpc-elem-star-event>
+				<template is="dom-repeat"
+					items="{{events}}"
+					as="event">
+						<tpc-elem-star-event event="{{event}}">
+						</tpc-elem-star-event>
+				</template>
+
 			</div>
 		</app-header-layout>
 
@@ -62,6 +67,29 @@ Page ...
 				firebaseApp: {
 					type: Object,
 					notify: false
+				},
+
+				events: {
+					type: Array,
+					value: [
+						{
+							title: 'Ukrainian open 2017',
+							startTime: '2017-09-15T00:00:00+02:00',
+							endTime: '2017-09-18T00:00:00+02:00',
+							location: {
+								city: 'Kyiv',
+								country: 'Ukraine',
+								latitude: 50.449990,
+								longitude: 30.443145,
+								name: 'Cosmopolit Hotel',
+								street: '6 Vadyma Hetmana St',
+								zip: '02000'
+							},
+							eventLink: 'http://ua-open.com/',
+							facebookLink: 'https://www.facebook.com/ukrainianOpenWCS',
+							imageUrl: 'img/2017-09-uk-open.png'
+						}
+					]
 				}
 			}
 		});
