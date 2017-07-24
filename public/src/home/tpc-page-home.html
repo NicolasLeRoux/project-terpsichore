@@ -121,7 +121,7 @@ Page ...
 					startMoment = mStart || moment(),
 					params = {
 						orderBy: '\"sortKey\"',
-						startAt: startMoment.format('YYYYMMDDHHmm'),
+						startAt: startMoment.subtract(5, 'hours').format('YYYYMMDDHHmm'),
 						endAt: startMoment.add(2, 'months').format('YYYYMMDDHHmm'),
 						limitToFirst: 10
 					};
