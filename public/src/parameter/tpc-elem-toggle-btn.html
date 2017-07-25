@@ -1,0 +1,60 @@
+<!--
+Element ...
+-->
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<dom-module id="tpc-elem-toggle-btn">
+
+	<template>
+		<style>
+			span {
+				padding: 5px 20px;
+				border-radius: 20px;
+			}
+
+			span[data-active="true"] {
+				background-color: HotPink;
+				color: Snow;
+			}
+
+			span[data-active="false"] {
+				background-color: Snow;
+				color: black;
+			}
+		</style>
+
+		<span>
+			{{name}}
+		</span>
+	</template>
+
+	<script>
+		Polymer({
+			is: 'tpc-elem-toggle-btn',
+
+			properties: {
+				name: {
+					type: String
+				},
+				state: {
+					type: Boolean,
+					observer: '_onStateChange',
+				}
+			},
+
+			listeners: {
+				'tap': 'onTap'
+			},
+
+			onTap: function () {
+				this.state = !this.state;
+			},
+
+			_onStateChange: function (newState) {
+				var node = this.$$('span');
+
+				node.dataset.active = newState;
+			}
+		});
+	</script>
+</dom-module>
